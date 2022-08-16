@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-08-11T00:10:05.251786+00:00",
+  "timestamp": "2022-08-16T00:11:34.781540+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -2645,9 +2645,17 @@
       ],
       "body": "Currently the core sign, verify, spkGen and spkVerify operations are silent on the form the messages take into the algorithm, based on conversations with @mikelodder7 these are most often inputed in the form of scalars as outputed by the MapToScalar function being proposed in #61. We should clarify this further in the spec.",
       "createdAt": "2022-03-06T23:53:49Z",
-      "updatedAt": "2022-04-21T23:30:01Z",
+      "updatedAt": "2022-08-15T18:55:29Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call 15th of August, subsequent text has clarified this significantly however supporting text at the start of the relevant operations would help to resolve any outstanding ambiguity.",
+          "createdAt": "2022-08-15T18:55:29Z",
+          "updatedAt": "2022-08-15T18:55:29Z"
+        }
+      ]
     },
     {
       "number": 78,
@@ -3643,7 +3651,7 @@
       ],
       "body": "Some of the security considerations documented in the spec were originally copied from the [bls-signature-draft](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature-04#section-5.2) and should now be re-reviewed for their applicability.",
       "createdAt": "2022-04-23T03:41:10Z",
-      "updatedAt": "2022-05-03T05:41:34Z",
+      "updatedAt": "2022-08-15T18:53:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -3652,6 +3660,13 @@
           "body": "Much of the existing security considerations were reviewed in #112, leaving this issue open as a reminder to consider any new security considerations that we made need to add",
           "createdAt": "2022-05-03T05:41:34Z",
           "updatedAt": "2022-05-03T05:41:34Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call 15th of August, consistency has significantly improved since filing this issue, however leaving open for the time being for a deeper review to be conducted",
+          "createdAt": "2022-08-15T18:53:01Z",
+          "updatedAt": "2022-08-15T18:53:01Z"
         }
       ]
     },
@@ -3866,7 +3881,7 @@
       "id": "I_kwDOF8lax85I5N1W",
       "title": "Ciphersuites format",
       "url": "https://github.com/decentralized-identity/bbs-signature/issues/118",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "BasileiosKal",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -3875,24 +3890,32 @@
       ],
       "body": "The ciphersuites definition currently used in the spec needs to be updated.\r\n1. There are terms that must be defined by most likely referencing their definition to some other spec. Examples include the base points of G1 and G2, the prime order p of those groups the security level of the ciphersuite (`k` in PR #116). Are there any other definitions we should include??\r\n2. A specific format for the ID of each ciphersuite must also be defined. Something like,\r\n```\r\nCipher_ID = \"BBS_\" || H2C_SUITE_ID || GEN_SC || HASH_OUTPUT_LEN || _\"\r\n```\r\nwhere `GEN_SC` will be used to distinguish between the scopes of the generators seed (i.e., global or issuer specific) and `HASH_OUTPUT_LEN` between the number of bytes drawn for each XOF (since the consensus seems to be that we will parameterize that value)??",
       "createdAt": "2022-05-02T14:27:27Z",
-      "updatedAt": "2022-05-03T00:54:05Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2022-08-15T18:50:12Z",
+      "closedAt": "2022-08-15T18:50:12Z",
+      "comments": [
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call 15th of August, issue has been resolved through #137",
+          "createdAt": "2022-08-15T18:50:12Z",
+          "updatedAt": "2022-08-15T18:50:12Z"
+        }
+      ]
     },
     {
       "number": 119,
       "id": "I_kwDOF8lax85I6dIS",
       "title": "Reference/Spec Implementation Language/Framework Selection",
       "url": "https://github.com/decentralized-identity/bbs-signature/issues/119",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tplooker",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "As resolved earlier this year multiple WG members expressed support for there to be a prototypical style implementation housed within this repo to test the implementability of the spec.\r\n\r\nThere are multiple possible languages/frameworks we could use, below is a bit of a list including key libraries we could use\r\n\r\n- Rust using https://docs.rs/bls12_381/latest/bls12_381/\r\n- Python using https://github.com/zebra-lucky/python-bls\r\n- Javascript using https://github.com/paulmillr/noble-bls12-381",
       "createdAt": "2022-05-02T19:51:23Z",
-      "updatedAt": "2022-05-02T23:09:08Z",
-      "closedAt": null,
+      "updatedAt": "2022-08-15T18:45:54Z",
+      "closedAt": "2022-08-15T18:45:54Z",
       "comments": [
         {
           "author": "christianpaquin",
@@ -3907,6 +3930,13 @@
           "body": "Thanks @christianpaquin really appreciate you taking the pen here!",
           "createdAt": "2022-05-02T23:09:07Z",
           "updatedAt": "2022-05-02T23:09:07Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call 15th of August, implementations by multiple WG members ongoing",
+          "createdAt": "2022-08-15T18:45:53Z",
+          "updatedAt": "2022-08-15T18:45:53Z"
         }
       ]
     },
@@ -3943,7 +3973,7 @@
       ],
       "body": "Currently for each operation documented in the spec we have the notion of both inputs and parameters, a convention adopted from the [bls-signature-draft](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature-04). \r\n\r\nLoosely what I think we have been following as a largely unwritten rule is that inputs are usually more dynamic or application driven/supplied in nature, where as parameters are more constant across multiple invocations of an operation(s).\r\n\r\nTo make things more complex we also appear to have two types/scopes of parameters, parameters shared across all operations vs parameters semi-unique to an operation, although it doesn't look like we are following this strictly. \r\n\r\nI think we need to\r\n\r\n1) Rationalise the difference between what constitutes an input vs a parameter\r\n2) Decide on the scoping of various parameters and how we notate them in reference to specific operations for example do we inline them all? or reference them from a common section that applies to all operations, or both?\r\n\r\nFurthermore I think we need to revisit certain values that may instead be considered parameters instead of inputs, in particular message generators. This is discussed more in #117 ",
       "createdAt": "2022-05-05T22:28:35Z",
-      "updatedAt": "2022-05-06T11:56:55Z",
+      "updatedAt": "2022-08-15T18:44:11Z",
       "closedAt": null,
       "comments": [
         {
@@ -3952,6 +3982,13 @@
           "body": "One option would be to define that anything that is described by a ciphersuite (i.e., base points etc.,) is a parameter. This will also apply to the message generators.\r\n\r\nA stricter definition will be to consider anything that is defined by a ciphersuite AND it is independent from any inputs to be a parameter. This doesn't really apply to the message generators (their number depends to the number of messages).\r\n\r\nRegarding 2 my vote is to inline the parameters if we would to consider the message generators as a parameter. If the message generators are supplied as input we can have a separate section to avoid repeated text.",
           "createdAt": "2022-05-06T11:56:54Z",
           "updatedAt": "2022-05-06T11:56:54Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "DIscussed on WG call 15th August, I will look through the spec to see if we have resolved the ambiguity that was previously present",
+          "createdAt": "2022-08-15T18:44:11Z",
+          "updatedAt": "2022-08-15T18:44:11Z"
         }
       ]
     },
@@ -4152,11 +4189,12 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
+        "ready-for-pr",
         "core"
       ],
       "body": "Currently the spec creates generators using hash-to-curve implemented with `shake256` (for which we describe a h2c ciphersuite).\r\n\r\nLooking at implementations of pairing-friendly-curves though, most of them seem to natively support h2c with `sha256` (like blst). This means that,\r\n1. We may have to implement h2c with `shake256` our self's.\r\n2. Applications that elect to use the natively supported h2c implementation (and will be many of those most likely) will create generators that are not interoperable with the ones we describe in the spec.\r\n\r\nAt the very least we may be creating an implementation barrier by making it hard to use `sha256` for h2c.\r\n\r\nSince efficiency is not an issue when creating generators, and taking into account the wider spread of `sha256`, should we update h2c to use `sha` instead of `shake`?? We can leave the ciphersuite definition for h2c using `shake256` as an alternative, while the bls12-381 ciphersuite will use h2c with `sha256`??",
       "createdAt": "2022-05-17T11:18:01Z",
-      "updatedAt": "2022-08-08T18:52:43Z",
+      "updatedAt": "2022-08-15T18:16:15Z",
       "closedAt": null,
       "comments": [
         {
@@ -4284,6 +4322,13 @@
           "body": "Discussed on 8th of August WG call there appears to be a meaningful improvement in the implementability of the scheme when using SHA256 based on pre-existing implementations. Therefore we see value in defining a cipher suite to work with SHA256. The question remains on whether this is an additional cipher suite OR a replacement for the current one that uses SHAKE 256.",
           "createdAt": "2022-08-08T18:52:43Z",
           "updatedAt": "2022-08-08T18:52:43Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "DIscussed on 15th of August WG call, based on implementation feedback we are going to define a SHA256 based ciphersuite to support further discussion around it.",
+          "createdAt": "2022-08-15T18:16:15Z",
+          "updatedAt": "2022-08-15T18:16:15Z"
         }
       ]
     },
@@ -4336,7 +4381,7 @@
       ],
       "body": "Currently the BLS12-381 ciphersuite defines to use SHAKE-256 for the implementation of the `hash` function but doesn't clarify how many bytes to draw, this should be updated.",
       "createdAt": "2022-05-20T00:05:25Z",
-      "updatedAt": "2022-08-08T18:42:00Z",
+      "updatedAt": "2022-08-15T18:41:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -4352,6 +4397,13 @@
           "body": "Discussed on 8th August WG call",
           "createdAt": "2022-08-08T18:41:59Z",
           "updatedAt": "2022-08-08T18:41:59Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Also related to #143 because using a non XOF would not create such ambiguity",
+          "createdAt": "2022-08-15T18:41:19Z",
+          "updatedAt": "2022-08-15T18:41:19Z"
         }
       ]
     },
@@ -4964,11 +5016,12 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
+        "ready-for-pr",
         "core"
       ],
       "body": "The current hash_to_scalar construction does not allow for the calling operation to define the DST that will go into the underlying expand_message used. Some operations that need additional domain separation append the DST to the message.\r\n\r\nThe problem is that we cannot prove indistinguishably that way. For example consider the following, lets assume that in a protocol we call hash_to_scalar in the input `msg ||  I2OSP(length(DST2), 1) || DST2` and get `b_1, b_2, ...` where,\r\n\r\n```\r\nb_0 = H(Z_pad || msg ||  I2OSP(length(DST2), 1) || DST2 || I2OSP(len_in_bytes, 2) || I2OSP(0, 1) || DST_prime)\r\nb_1 = H(b_0 || ...)\r\nb_2 = ....\r\n```\r\nThen, in some other place, the protocol returns `h2 = H(Z_pad || msg || I2OSP(length(DST2), 1) || DST2)`. In that case, after observing `h2` I could do a length-extension attack on H, calculate `b_0` and then `b_1`, `b_2` etc. This is not really a practical issue (it becomes less practical -but not impossible- if we also consider padding), but it does stop us from proving security. It also becomes a larger issue if people use a different expand_message (if they just use sha512 with a counter for example).\r\n\r\n## Proposed Solutions\r\n### Solution A\r\nThe currently proposed solution, discussed in the WG call, would be to define an additional optional argument to hash_to_scalar like `dstInfo` and append that to the DST already defined. i.e., inside hash_to_scalar calculate,\r\n```\r\n4. dst_prime = DST || dstInfo || I2OSP(length(dstInfo), 1)\r\n5. expand_message(msg, dst_prime, len_in_bytes)\r\n```\r\nThis is a bit weird because we are prepending the length everywhere else in the spec. However, if we do the same here and calculate `dst_prime = DST || I2SOP(length(dstIfo), 1) || dstInfo` then for example the pairs `DST1 = [4, 2]`, `dstInfo1 = [2]` and `DST2 = [4]`, `dstInfo2 = [1, 2]` will give the same `dst_prime`. \r\n\r\nSimilarly, we can't just concatenate the 2 (i.e., `dst_prime = DST || dstInfo`) because then for example the pairs `DST1 = [1, 2]`, `dstInfo1 = [3]` and `DST2 = [1]`, `dstInfo2 = [2, 3]` will again give the same `dst_prime`\r\n\r\n### Solution B\r\nDon't define the DST in hash_to_scalar but require it as an input. So whatever operation calls hash_to_scalar will also need to specify a DST value to pass it. This is probably the most efficient approach when it comes to a straight line implementation, but IMO the \"ugliest\" looking when it comes to the spec.",
       "createdAt": "2022-07-04T15:35:54Z",
-      "updatedAt": "2022-07-04T22:08:10Z",
+      "updatedAt": "2022-08-15T18:40:15Z",
       "closedAt": null,
       "comments": [
         {
@@ -5005,6 +5058,13 @@
           "body": "Cool! Yea this maybe the best thing to do. I think it is a little more prone to error but that is why we have test vectors. Will give it a shot!",
           "createdAt": "2022-07-04T22:08:09Z",
           "updatedAt": "2022-07-04T22:08:09Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call on 15th August, issue is ready for PR with consensus to move forward with the approach described by @andrewwhitehead ",
+          "createdAt": "2022-08-15T18:40:15Z",
+          "updatedAt": "2022-08-15T18:40:15Z"
         }
       ]
     },
