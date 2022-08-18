@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-08-16T00:11:34.781540+00:00",
+  "timestamp": "2022-08-18T00:09:51.777074+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -25636,6 +25636,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 205,
+      "id": "PR_kwDOF8lax849WUDY",
+      "title": "Removed generator_seed from create_generators calls",
+      "url": "https://github.com/decentralized-identity/bbs-signature/pull/205",
+      "state": "OPEN",
+      "author": "christianpaquin",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Removed the `generator_seed` parameter from the `create_generators` calls, as it is already defined as a ciphersuite value within that function.",
+      "createdAt": "2022-08-17T20:07:56Z",
+      "updatedAt": "2022-08-17T20:07:56Z",
+      "baseRepository": "decentralized-identity/bbs-signature",
+      "baseRefName": "main",
+      "baseRefOid": "57d6ae95c501167ed319a124f5f376e6f04f925a",
+      "headRepository": "christianpaquin/bbs-signature",
+      "headRefName": "create-generators-params",
+      "headRefOid": "371b5036fc51d13a6e1fdbecf43d7a186b436338",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
