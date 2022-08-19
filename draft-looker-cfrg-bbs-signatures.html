@@ -1041,7 +1041,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 19 February 2023</td>
+<td class="center">Expires 20 February 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1054,12 +1054,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-looker-cfrg-bbs-signatures-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-08-18" class="published">18 August 2022</time>
+<time datetime="2022-08-19" class="published">19 August 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-02-19">19 February 2023</time></dd>
+<dd class="expires"><time datetime="2023-02-20">20 February 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1113,7 +1113,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 February 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 February 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2028,7 +2028,7 @@ Procedure:
 8.  if dom_for_hash is INVALID, return INVALID
 9.  domain = hash_to_scalar(dom_for_hash, 1)
 10. C1 = (Abar - D) * c + A' * e^ + Q_1 * r2^
-11. T = P1 + Q_2 * domain + H_i1 * msg_i1 + ... H_iR * msg_iR
+11. T = P1 + Q_2 * domain + H_i1 * msg_i1 + ... + H_iR * msg_iR
 12. C2 = T * c - D * r3^ + Q_1 * s^ + H_j1 * m^_j1 + ... + H_jU * m^_jU
 13. cv_array = (A', Abar, D, C1, C2, R, i1, ..., iR,
                        msg_i1, ..., msg_iR, domain, ph)
