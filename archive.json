@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-08-23T00:11:21.349537+00:00",
+  "timestamp": "2022-08-28T00:13:11.581943+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -25897,7 +25897,7 @@
       "labels": [],
       "body": "Depended on #208 being merged ahead",
       "createdAt": "2022-08-18T21:54:02Z",
-      "updatedAt": "2022-08-19T17:23:56Z",
+      "updatedAt": "2022-08-25T04:26:16Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "4e7cff0f246eeedc9b8736fde11b0ae73588e199",
@@ -25908,7 +25908,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "christianpaquin",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Question about the values used to generate these test vectors: do all the signatures and proofs use the generators in `fixtures/generators.json`, and if so, are the two first entries `Q1` and `Q2` and the remaining ones `H1` ... `H8` ? ",
+          "createdAt": "2022-08-25T04:26:16Z",
+          "updatedAt": "2022-08-25T04:26:16Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOF8lax85AUlim",
@@ -25978,13 +25986,13 @@
       "labels": [],
       "body": "Adding a sha256 based suite alongside the existing shake256 based one.",
       "createdAt": "2022-08-19T17:19:05Z",
-      "updatedAt": "2022-08-22T19:17:55Z",
+      "updatedAt": "2022-08-26T10:21:01Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "0523774c6f573dedb65f4e248fc24d7600aa9988",
       "headRepository": "BasileiosKal/bbs-signature",
       "headRefName": "sha256_suite",
-      "headRefOid": "1399d8330fd26705d81120ed2e1bd40817b46514",
+      "headRefOid": "c3cefcb34d551033502ad359e3210a7c90eba6a7",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
