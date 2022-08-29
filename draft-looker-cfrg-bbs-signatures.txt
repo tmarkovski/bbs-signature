@@ -112,8 +112,10 @@ Table of Contents
      6.1.  Ciphersuite Format
        6.1.1.  Ciphersuite ID
        6.1.2.  Additional Parameters
-     6.2.  BLS12-381 Ciphersuite
-       6.2.1.  Test Vectors
+     6.2.  BLS12-381 Ciphersuites
+       6.2.1.  BLS12-381-SHAKE-256
+       6.2.2.  BLS12-381-SHA-256
+       6.2.3.  Test Vectors
    7.  IANA Considerations
    8.  Acknowledgements
    9.  Normative References
@@ -1469,16 +1471,33 @@ Procedure:
       define this seed OR how to compute it as a pre-cursor operation to
       any others.
 
-6.2.  BLS12-381 Ciphersuite
+6.2.  BLS12-381 Ciphersuites
 
-   The following ciphersuite is based on the BLS12-381 elliptic curve
-   defined in Section 4.2.1 of [I-D.irtf-cfrg-pairing-friendly-curves].
-   The targeted security level of the suite in bits is k = 128.  The
-   ciphersuite makes use of an extendable output function, and most
-   specifically of SHAKE-256, as defined in Section 6.2 of [SHA3].  It
-   also uses the hash-to-curve suite defined by this document in
+   The following two ciphersuites are based on the BLS12-381 elliptic
+   curves defined in Section 4.2.1 of
+   [I-D.irtf-cfrg-pairing-friendly-curves].  The targeted security level
+   of both suites in bits is k = 128.
+
+   The first ciphersuite makes use of an extendable output function, and
+   most specifically of SHAKE-256, as defined in Section 6.2 of [SHA3].
+   It also uses the hash-to-curve suite defined by this document in
    Appendix A.1 (#bls12-381-hash_to_curve-def), which also makes use of
    the SHAKE-256 function.
+
+   The second ciphersuite uses SHA-256, as defined in Section 6.2 of
+   [SHA2] and the BLS12-381 G1 hash-to-curve suite defined in
+   Section 8.8.1 of the [I-D.irtf-cfrg-hash-to-curve] document.
+
+   Note that these two ciphersuites differ only in the hash function
+   (SHAKE-256 vs SHA-256) and in the hash-to-curve suites used.  The
+   hash-to-curve suites differ in the expand_message variant and
+   underlying hash function.  More concretely, the BLS12-381-SHAKE-256
+   (#bls12-381-shake-256) ciphersuite makes use of expand_message_xof
+   with SHAKE-256, while BLS12-381-SHA-256 (#bls12-381-sha-256) makes
+   use of expand_message_xmd with SHA-256.  Curve parameters are common
+   between the two ciphersuites.
+
+6.2.1.  BLS12-381-SHAKE-256
 
    *Basic parameters*:
 
@@ -1521,7 +1540,50 @@ Procedure:
       create_generators (#generator-point-computation) operation to
       compute the required set of message generators.
 
-6.2.1.  Test Vectors
+6.2.2.  BLS12-381-SHA-256
+
+   *Basic parameters*:
+
+   *  Ciphersuite_ID: "BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_"
+
+   *  hash: SHA-256 as defined in [SHA2].
+
+   *  octet_scalar_length: 32, based on the RECOMMENDED approach of
+      ceil(log2(r)/8).
+
+   *  octet_point_length: 48, based on the RECOMMENDED approach of
+      ceil(log2(p)/8).
+
+   *  hash_to_curve_suite: "BLS12381G1_XMD:SHA-256_SSWU_RO_" as defined
+      in Section 8.8.1 of the [I-D.irtf-cfrg-hash-to-curve] for the G1
+      subgroup.
+
+   *Serialization functions*:
+
+   *  point_to_octets_g1: follows the format documented in Appendix C
+      section 1 of [I-D.irtf-cfrg-pairing-friendly-curves] for the G1
+      subgroup, using compression (i.e., setting C_bit = 1).
+
+   *  point_to_octets_g2: follows the format documented in Appendix C
+      section 1 of [I-D.irtf-cfrg-pairing-friendly-curves] for the G2
+      subgroup, using compression (i.e., setting C_bit = 1).
+
+   *  octets_to_point_g1: follows the format documented in Appendix C
+      section 2 of [I-D.irtf-cfrg-pairing-friendly-curves] for the G1
+      subgroup.
+
+   *  octets_to_point_g2: follows the format documented in Appendix C
+      section 2 of [I-D.irtf-cfrg-pairing-friendly-curves] for the G2
+      subgroup.
+
+   *Generator parameters*:
+
+   *  generator_seed: A global seed value of "BBS_BLS12381G1_XMD:SHA-
+      256_SSWU_RO_MESSAGE_GENERATOR_SEED" which is used by the
+      create_generators (#generator-point-computation) operation to
+      compute the required set of message generators.
+
+6.2.3.  Test Vectors
 
    The following section details a basic set of test vectors that can be
    used to confirm an implementations correctness
@@ -1533,7 +1595,7 @@ Procedure:
 
    Further fixtures are available in Appendix C
 
-6.2.1.1.  Message Generators
+6.2.3.1.  Message Generators
 
    Following the procedure defined in Section 4.1 with an input seed
    value of
@@ -1568,7 +1630,7 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 
 9594346850ba101da9f94b9856bba3843c959d22e8d6d58c3ad8b25c9a2209945ca73cdf9ce6fd51478ecc1377bdad05
 
-6.2.1.2.  Key Pair
+6.2.3.2.  Key Pair
 
    Following the procedure defined in Section 3.3.1 with an input IKM
    value as follows
@@ -1584,18 +1646,18 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 
 8e146f42de0bf1754692788a4692eeed788f9555837fd208bd6d207affc12916fe25615d5afe2e386984dded54b0bd0809a82bfcd93795a85ee00f5857294cc06391fc049d0b7ea4d1d7ce65548199429dbdb0bf0946f6123daf3454c39bcae4
 
-6.2.1.3.  Valid Single Message Signature
+6.2.3.3.  Valid Single Message Signature
 
    Using the following message
 
    9872ad089e452c7b6e283dfac2a80d58e8d0ff71cc4d5e310a1debdda4a45f02
 
-   Along with the SK value as defined in Section 6.2.1.2 as inputs into
+   Along with the SK value as defined in Section 6.2.3.2 as inputs into
    the Sign operations, yields the following output signature
 
 aacb0e0ccc477de9408ec18810b508abccb975e2c8099ea93ba28bf66c836ac31189097446c5c5b67d6aa6aa1a5e01a45d2ee5348010e06d0e9ce7c0737e0e2cd40f270d3fec47e85f6900bce168c0701b87c0afae739823481f3de17823587bec26d5716a3d893a24d996396eca139e
 
-6.2.1.4.  Valid Multi-Message Signature
+6.2.3.4.  Valid Multi-Message Signature
 
    Using the following messages (*Note* the ordering of the messages
    MUST be preserved)
@@ -1620,7 +1682,7 @@ aacb0e0ccc477de9408ec18810b508abccb975e2c8099ea93ba28bf66c836ac31189097446c5c5b6
 
 63333434313336643961623032646134646435393038626262613931336165366635386332636338343462383032613666383131663566623037356639623830
 
-   Along with the SK value as defined in Section 6.2.1.2 as inputs into
+   Along with the SK value as defined in Section 6.2.3.2 as inputs into
    the Sign operations, yields the following output signature
 
 89f61a400283385ab6d6233e9a7c4659e1822e280d4b9a0ba9ec867faa59a4ff27f44d956a3f2e297236342d7419a4c758385744297a55459c3a18c5ed76601e0c2226da1a95df39f9be2bbf2311b46859482c85ba0b109d5fa9b7cbaf90f9b8bc78f506666c9e64f14490441669ccc5
@@ -1682,6 +1744,10 @@ aacb0e0ccc477de9408ec18810b508abccb975e2c8099ea93ba28bf66c836ac31189097446c5c5b6
               "PKCS #1: RSA Cryptography Specifications Version 2.2",
               RFC 8017, DOI 10.17487/RFC8017, November 2016,
               <https://www.rfc-editor.org/info/rfc8017>.
+
+   [SHA2]     NIST, "Secure Hash Standard (SHS)",
+              <https://nvlpubs.nist.gov/nistpubs/FIPS/
+              NIST.FIPS.180-4.pdf>.
 
    [SHA3]     NIST, "SHA-3 Standard: Permutation-Based Hash and
               Extendable-Output Functions",
@@ -1893,7 +1959,7 @@ C.1.  Modified Message Signature
 
 aacb0e0ccc477de9408ec18810b508abccb975e2c8099ea93ba28bf66c836ac31189097446c5c5b67d6aa6aa1a5e01a45d2ee5348010e06d0e9ce7c0737e0e2cd40f270d3fec47e85f6900bce168c0701b87c0afae739823481f3de17823587bec26d5716a3d893a24d996396eca139e
 
-   Along with the PK value as defined in Section 6.2.1.2 as inputs into
+   Along with the PK value as defined in Section 6.2.3.2 as inputs into
    the Verify operation should fail signature validation due to the
    message value being different from what was signed
 
@@ -1909,7 +1975,7 @@ C.2.  Extra Unsigned Message Signature
 
 aacb0e0ccc477de9408ec18810b508abccb975e2c8099ea93ba28bf66c836ac31189097446c5c5b67d6aa6aa1a5e01a45d2ee5348010e06d0e9ce7c0737e0e2cd40f270d3fec47e85f6900bce168c0701b87c0afae739823481f3de17823587bec26d5716a3d893a24d996396eca139e
 
-   Along with the PK value as defined in Section 6.2.1.2 as inputs into
+   Along with the PK value as defined in Section 6.2.3.2 as inputs into
    the Verify operation should fail signature validation due to an
    additional message being supplied that was not signed
 
@@ -1925,7 +1991,7 @@ C.3.  Missing Message Signature
 
 89f61a400283385ab6d6233e9a7c4659e1822e280d4b9a0ba9ec867faa59a4ff27f44d956a3f2e297236342d7419a4c758385744297a55459c3a18c5ed76601e0c2226da1a95df39f9be2bbf2311b46859482c85ba0b109d5fa9b7cbaf90f9b8bc78f506666c9e64f14490441669ccc5
 
-   Along with the PK value as defined in Section 6.2.1.2 as inputs into
+   Along with the PK value as defined in Section 6.2.3.2 as inputs into
    the Verify operation should fail signature validation due to missing
    messages that were originally present during the signing
 
@@ -1957,7 +2023,7 @@ C.4.  Reordered Message Signature
 
 89f61a400283385ab6d6233e9a7c4659e1822e280d4b9a0ba9ec867faa59a4ff27f44d956a3f2e297236342d7419a4c758385744297a55459c3a18c5ed76601e0c2226da1a95df39f9be2bbf2311b46859482c85ba0b109d5fa9b7cbaf90f9b8bc78f506666c9e64f14490441669ccc5
 
-   Along with the PK value as defined in Section 6.2.1.2 as inputs into
+   Along with the PK value as defined in Section 6.2.3.2 as inputs into
    the Verify operation should fail signature validation due to messages
    being re-ordered from the order in which they were signed
 
@@ -1989,7 +2055,7 @@ C.5.  Wrong Public Key Signature
 
 89f61a400283385ab6d6233e9a7c4659e1822e280d4b9a0ba9ec867faa59a4ff27f44d956a3f2e297236342d7419a4c758385744297a55459c3a18c5ed76601e0c2226da1a95df39f9be2bbf2311b46859482c85ba0b109d5fa9b7cbaf90f9b8bc78f506666c9e64f14490441669ccc5
 
-   Along with the PK value as defined in Section 6.2.1.2 as inputs into
+   Along with the PK value as defined in Section 6.2.3.2 as inputs into
    the Verify operation should fail signature validation due to public
    key used to verify is in-correct
 

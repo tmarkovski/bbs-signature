@@ -1295,10 +1295,16 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-bls12-381-ciphersuite" class="xref">BLS12-381 Ciphersuite</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-bls12-381-ciphersuites" class="xref">BLS12-381 Ciphersuites</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
-                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-test-vectors" class="xref">Test Vectors</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="xref">6.2.1</a>.  <a href="#name-bls12-381-shake-256" class="xref">BLS12-381-SHAKE-256</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="xref">6.2.2</a>.  <a href="#name-bls12-381-sha-256" class="xref">BLS12-381-SHA-256</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.3">
+                    <p id="section-toc.1-1.6.2.2.2.3.1"><a href="#section-6.2.3" class="xref">6.2.3</a>.  <a href="#name-test-vectors" class="xref">Test Vectors</a></p>
 </li>
                 </ul>
 </li>
@@ -2661,77 +2667,132 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
 </div>
 </section>
 </div>
-<div id="bls12-381-ciphersuite">
+<div id="bls12-381-ciphersuites">
 <section id="section-6.2">
-        <h3 id="name-bls12-381-ciphersuite">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-bls12-381-ciphersuite" class="section-name selfRef">BLS12-381 Ciphersuite</a>
+        <h3 id="name-bls12-381-ciphersuites">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-bls12-381-ciphersuites" class="section-name selfRef">BLS12-381 Ciphersuites</a>
         </h3>
-<p id="section-6.2-1">The following ciphersuite is based on the BLS12-381 elliptic curve defined in Section 4.2.1 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span>. The targeted security level of the suite in bits is <code>k = 128</code>. The ciphersuite makes use of an extendable output function, and most specifically of SHAKE-256, as defined in Section 6.2 of <span>[<a href="#SHA3" class="xref">SHA3</a>]</span>. It also uses the hash-to-curve suite defined by this document in <a href="#bls12-381-hash_to_curve-def">Appendix A.1</a>, which also makes use of the SHAKE-256 function.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2-2"><strong>Basic parameters</strong>:<a href="#section-6.2-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-6.2-3.1">
-            <p id="section-6.2-3.1.1">Ciphersuite_ID: "BBS_BLS12381G1_XOF:SHAKE-256_SSWU_RO_"<a href="#section-6.2-3.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.2-3.2">
-            <p id="section-6.2-3.2.1">hash: SHAKE-256 as defined in <span>[<a href="#SHA3" class="xref">SHA3</a>]</span>.<a href="#section-6.2-3.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.2-3.3">
-            <p id="section-6.2-3.3.1">octet_scalar_length: 32, based on the RECOMMENDED approach of <code>ceil(log2(r)/8)</code>.<a href="#section-6.2-3.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.2-3.4">
-            <p id="section-6.2-3.4.1">octet_point_length: 48, based on the RECOMMENDED approach of <code>ceil(log2(p)/8)</code>.<a href="#section-6.2-3.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.2-3.5">
-            <p id="section-6.2-3.5.1">hash_to_curve_suite: "BLS12381G1_XOF:SHAKE-256_SSWU_R0_" as defined in <a href="#bls12-381-hash-to-curve-definition-using-shake-256">Appendix A.1</a> for the G1 subgroup.<a href="#section-6.2-3.5.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-6.2-4"><strong>Serialization functions</strong>:<a href="#section-6.2-4" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-6.2-5.1">
-            <p id="section-6.2-5.1.1">point_to_octets_g1: follows the format documented in Appendix C section 1 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G1 subgroup, using compression (i.e., setting C_bit = 1).<a href="#section-6.2-5.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.2-5.2">
-            <p id="section-6.2-5.2.1">point_to_octets_g2: follows the format documented in Appendix C section 1 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G2 subgroup, using compression (i.e., setting C_bit = 1).<a href="#section-6.2-5.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.2-5.3">
-            <p id="section-6.2-5.3.1">octets_to_point_g1: follows the format documented in Appendix C section 2 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G1 subgroup.<a href="#section-6.2-5.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.2-5.4">
-            <p id="section-6.2-5.4.1">octets_to_point_g2: follows the format documented in Appendix C section 2 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G2 subgroup.<a href="#section-6.2-5.4.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-6.2-6"><strong>Generator parameters</strong>:<a href="#section-6.2-6" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-6.2-7.1">generator_seed: A global seed value of "BBS_BLS12381G1_XOF:SHAKE-256_SSWU_RO_MESSAGE_GENERATOR_SEED" which is used by the <a href="#generator-point-computation">create_generators</a> operation to compute the required set of message generators.<a href="#section-6.2-7.1" class="pilcrow">¶</a>
-</li>
-        </ul>
-<div id="test-vectors">
+<p id="section-6.2-1">The following two ciphersuites are based on the BLS12-381 elliptic curves defined in Section 4.2.1 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span>. The targeted security level of both suites in bits is <code>k = 128</code>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">The first ciphersuite makes use of an extendable output function, and most specifically of SHAKE-256, as defined in Section 6.2 of <span>[<a href="#SHA3" class="xref">SHA3</a>]</span>. It also uses the hash-to-curve suite defined by this document in <a href="#bls12-381-hash_to_curve-def">Appendix A.1</a>, which also makes use of the SHAKE-256 function.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">The second ciphersuite uses SHA-256, as defined in Section 6.2 of <span>[<a href="#SHA2" class="xref">SHA2</a>]</span> and the BLS12-381 G1 hash-to-curve suite defined in Section 8.8.1 of the <span>[<a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">I-D.irtf-cfrg-hash-to-curve</a>]</span> document.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">Note that these two ciphersuites differ only in the hash function (SHAKE-256 vs SHA-256) and in the hash-to-curve suites used. The hash-to-curve suites differ in the <code>expand_message</code> variant and underlying hash function. More concretely, the <a href="#bls12-381-shake-256">BLS12-381-SHAKE-256</a> ciphersuite makes use of <code>expand_message_xof</code> with SHAKE-256, while <a href="#bls12-381-sha-256">BLS12-381-SHA-256</a> makes use of <code>expand_message_xmd</code> with SHA-256. Curve parameters are common between the two ciphersuites.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<div id="bls12-381-shake-256">
 <section id="section-6.2.1">
-          <h4 id="name-test-vectors">
-<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-test-vectors" class="section-name selfRef">Test Vectors</a>
+          <h4 id="name-bls12-381-shake-256">
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-bls12-381-shake-256" class="section-name selfRef">BLS12-381-SHAKE-256</a>
           </h4>
-<p id="section-6.2.1-1">The following section details a basic set of test vectors that can be used to confirm an implementations correctness<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.2.1-2"><strong>NOTE</strong> All binary data below is represented as octet strings encoded in hexadecimal format<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.2.1-3"><strong>NOTE</strong> These fixtures are a work in progress and subject to change<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.2.1-4">Further fixtures are available in <a href="#additional-bls12-381-ciphersuite-test-vectors" class="xref">Appendix C</a><a href="#section-6.2.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-1"><strong>Basic parameters</strong>:<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.1-2.1">
+              <p id="section-6.2.1-2.1.1">Ciphersuite_ID: "BBS_BLS12381G1_XOF:SHAKE-256_SSWU_RO_"<a href="#section-6.2.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-2.2">
+              <p id="section-6.2.1-2.2.1">hash: SHAKE-256 as defined in <span>[<a href="#SHA3" class="xref">SHA3</a>]</span>.<a href="#section-6.2.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-2.3">
+              <p id="section-6.2.1-2.3.1">octet_scalar_length: 32, based on the RECOMMENDED approach of <code>ceil(log2(r)/8)</code>.<a href="#section-6.2.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-2.4">
+              <p id="section-6.2.1-2.4.1">octet_point_length: 48, based on the RECOMMENDED approach of <code>ceil(log2(p)/8)</code>.<a href="#section-6.2.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-2.5">
+              <p id="section-6.2.1-2.5.1">hash_to_curve_suite: "BLS12381G1_XOF:SHAKE-256_SSWU_R0_" as defined in <a href="#bls12-381-hash-to-curve-definition-using-shake-256">Appendix A.1</a> for the G1 subgroup.<a href="#section-6.2.1-2.5.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.2.1-3"><strong>Serialization functions</strong>:<a href="#section-6.2.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.1-4.1">
+              <p id="section-6.2.1-4.1.1">point_to_octets_g1: follows the format documented in Appendix C section 1 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G1 subgroup, using compression (i.e., setting C_bit = 1).<a href="#section-6.2.1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-4.2">
+              <p id="section-6.2.1-4.2.1">point_to_octets_g2: follows the format documented in Appendix C section 1 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G2 subgroup, using compression (i.e., setting C_bit = 1).<a href="#section-6.2.1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-4.3">
+              <p id="section-6.2.1-4.3.1">octets_to_point_g1: follows the format documented in Appendix C section 2 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G1 subgroup.<a href="#section-6.2.1-4.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-4.4">
+              <p id="section-6.2.1-4.4.1">octets_to_point_g2: follows the format documented in Appendix C section 2 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G2 subgroup.<a href="#section-6.2.1-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.2.1-5"><strong>Generator parameters</strong>:<a href="#section-6.2.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.1-6.1">generator_seed: A global seed value of "BBS_BLS12381G1_XOF:SHAKE-256_SSWU_RO_MESSAGE_GENERATOR_SEED" which is used by the <a href="#generator-point-computation">create_generators</a> operation to compute the required set of message generators.<a href="#section-6.2.1-6.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+<div id="bls12-381-sha-256">
+<section id="section-6.2.2">
+          <h4 id="name-bls12-381-sha-256">
+<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-bls12-381-sha-256" class="section-name selfRef">BLS12-381-SHA-256</a>
+          </h4>
+<p id="section-6.2.2-1"><strong>Basic parameters</strong>:<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.2-2.1">
+              <p id="section-6.2.2-2.1.1">Ciphersuite_ID: "BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_"<a href="#section-6.2.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.2">
+              <p id="section-6.2.2-2.2.1">hash: SHA-256 as defined in <span>[<a href="#SHA2" class="xref">SHA2</a>]</span>.<a href="#section-6.2.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.3">
+              <p id="section-6.2.2-2.3.1">octet_scalar_length: 32, based on the RECOMMENDED approach of <code>ceil(log2(r)/8)</code>.<a href="#section-6.2.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.4">
+              <p id="section-6.2.2-2.4.1">octet_point_length: 48, based on the RECOMMENDED approach of <code>ceil(log2(p)/8)</code>.<a href="#section-6.2.2-2.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.5">
+              <p id="section-6.2.2-2.5.1">hash_to_curve_suite: "BLS12381G1_XMD:SHA-256_SSWU_RO_" as defined in Section 8.8.1 of the <span>[<a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">I-D.irtf-cfrg-hash-to-curve</a>]</span> for the G1 subgroup.<a href="#section-6.2.2-2.5.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.2.2-3"><strong>Serialization functions</strong>:<a href="#section-6.2.2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.2-4.1">
+              <p id="section-6.2.2-4.1.1">point_to_octets_g1: follows the format documented in Appendix C section 1 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G1 subgroup, using compression (i.e., setting C_bit = 1).<a href="#section-6.2.2-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-4.2">
+              <p id="section-6.2.2-4.2.1">point_to_octets_g2: follows the format documented in Appendix C section 1 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G2 subgroup, using compression (i.e., setting C_bit = 1).<a href="#section-6.2.2-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-4.3">
+              <p id="section-6.2.2-4.3.1">octets_to_point_g1: follows the format documented in Appendix C section 2 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G1 subgroup.<a href="#section-6.2.2-4.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-4.4">
+              <p id="section-6.2.2-4.4.1">octets_to_point_g2: follows the format documented in Appendix C section 2 of <span>[<a href="#I-D.irtf-cfrg-pairing-friendly-curves" class="xref">I-D.irtf-cfrg-pairing-friendly-curves</a>]</span> for the G2 subgroup.<a href="#section-6.2.2-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.2.2-5"><strong>Generator parameters</strong>:<a href="#section-6.2.2-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.2-6.1">generator_seed: A global seed value of "BBS_BLS12381G1_XMD:SHA-256_SSWU_RO_MESSAGE_GENERATOR_SEED" which is used by the <a href="#generator-point-computation">create_generators</a> operation to compute the required set of message generators.<a href="#section-6.2.2-6.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+<div id="test-vectors">
+<section id="section-6.2.3">
+          <h4 id="name-test-vectors">
+<a href="#section-6.2.3" class="section-number selfRef">6.2.3. </a><a href="#name-test-vectors" class="section-name selfRef">Test Vectors</a>
+          </h4>
+<p id="section-6.2.3-1">The following section details a basic set of test vectors that can be used to confirm an implementations correctness<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.3-2"><strong>NOTE</strong> All binary data below is represented as octet strings encoded in hexadecimal format<a href="#section-6.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.2.3-3"><strong>NOTE</strong> These fixtures are a work in progress and subject to change<a href="#section-6.2.3-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.3-4">Further fixtures are available in <a href="#additional-bls12-381-ciphersuite-test-vectors" class="xref">Appendix C</a><a href="#section-6.2.3-4" class="pilcrow">¶</a></p>
 <div id="message-generators">
-<section id="section-6.2.1.1">
+<section id="section-6.2.3.1">
             <h5 id="name-message-generators">
-<a href="#section-6.2.1.1" class="section-number selfRef">6.2.1.1. </a><a href="#name-message-generators" class="section-name selfRef">Message Generators</a>
+<a href="#section-6.2.3.1" class="section-number selfRef">6.2.3.1. </a><a href="#name-message-generators" class="section-name selfRef">Message Generators</a>
             </h5>
-<p id="section-6.2.1.1-1">Following the procedure defined in <a href="#generator-point-computation" class="xref">Section 4.1</a> with an input seed value of<a href="#section-6.2.1.1-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.1-2">
+<p id="section-6.2.3.1-1">Following the procedure defined in <a href="#generator-point-computation" class="xref">Section 4.1</a> with an input seed value of<a href="#section-6.2.3.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.1-2">
 <pre>BBS_BLS12381G1_XOF:SHAKE-256_SSWU_RO_MESSAGE_GENERATOR_SEED
-</pre><a href="#section-6.2.1.1-2" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.1-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2.1.1-3">a dst of<a href="#section-6.2.1.1-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.1-4">
+<p id="section-6.2.3.1-3">a dst of<a href="#section-6.2.3.1-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.1-4">
 <pre>BBS_BLS12381G1_XOF:SHAKE-256_SSWU_RO_
-</pre><a href="#section-6.2.1.1-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.1-4" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2.1.1-5">and a length value of <code>10</code><a href="#section-6.2.1.1-5" class="pilcrow">¶</a></p>
-<p id="section-6.2.1.1-6">Outputs the following values<a href="#section-6.2.1.1-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.1-7">
+<p id="section-6.2.3.1-5">and a length value of <code>10</code><a href="#section-6.2.3.1-5" class="pilcrow">¶</a></p>
+<p id="section-6.2.3.1-6">Outputs the following values<a href="#section-6.2.3.1-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.1-7">
 <pre>95c10133d125fd556a14b96b2f0607b757d41fbce15b61fc64ab60c4c9e3b268469abc41fb7713dc4034d3fee18eed6f
 
 a410a9c0fa4f48e14dc9f3cc11164625f98f5cc9c0e6f7690008ab6c83a073a63811caf1598d4094593bd1233bdf228e
@@ -2751,56 +2812,56 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 91230b37837e5df457ff32eb129fbc5fd31de7af88cb4263b545f998a23294b073d92458be7639b6c867f4e340c209d5
 
 9594346850ba101da9f94b9856bba3843c959d22e8d6d58c3ad8b25c9a2209945ca73cdf9ce6fd51478ecc1377bdad05
-</pre><a href="#section-6.2.1.1-7" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.1-7" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="key-pair">
-<section id="section-6.2.1.2">
+<section id="section-6.2.3.2">
             <h5 id="name-key-pair">
-<a href="#section-6.2.1.2" class="section-number selfRef">6.2.1.2. </a><a href="#name-key-pair" class="section-name selfRef">Key Pair</a>
+<a href="#section-6.2.3.2" class="section-number selfRef">6.2.3.2. </a><a href="#name-key-pair" class="section-name selfRef">Key Pair</a>
             </h5>
-<p id="section-6.2.1.2-1">Following the procedure defined in <a href="#keygen" class="xref">Section 3.3.1</a> with an input IKM value as follows<a href="#section-6.2.1.2-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.2-2">
+<p id="section-6.2.3.2-1">Following the procedure defined in <a href="#keygen" class="xref">Section 3.3.1</a> with an input IKM value as follows<a href="#section-6.2.3.2-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.2-2">
 <pre>0cf3cc44220fdb2f8ca701f8686ed7e9a32db440edc15a9b62222905d8c7bba3
-</pre><a href="#section-6.2.1.2-2" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.2-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2.1.2-3">Outputs the following SK value<a href="#section-6.2.1.2-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.2-4">
+<p id="section-6.2.3.2-3">Outputs the following SK value<a href="#section-6.2.3.2-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.2-4">
 <pre>5fb7e74b515a7ecd39e8b38df0eaa66e3630ec90c4df496f67ee7a2737dcb321
-</pre><a href="#section-6.2.1.2-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.2-4" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2.1.2-5">Following the procedure defined in <a href="#sktopk" class="xref">Section 3.3.2</a> with an input SK value as above produces the following PK value<a href="#section-6.2.1.2-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.2-6">
+<p id="section-6.2.3.2-5">Following the procedure defined in <a href="#sktopk" class="xref">Section 3.3.2</a> with an input SK value as above produces the following PK value<a href="#section-6.2.3.2-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.2-6">
 <pre>8e146f42de0bf1754692788a4692eeed788f9555837fd208bd6d207affc12916fe25615d5afe2e386984dded54b0bd0809a82bfcd93795a85ee00f5857294cc06391fc049d0b7ea4d1d7ce65548199429dbdb0bf0946f6123daf3454c39bcae4
-</pre><a href="#section-6.2.1.2-6" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.2-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="valid-single-message-signature">
-<section id="section-6.2.1.3">
+<section id="section-6.2.3.3">
             <h5 id="name-valid-single-message-signat">
-<a href="#section-6.2.1.3" class="section-number selfRef">6.2.1.3. </a><a href="#name-valid-single-message-signat" class="section-name selfRef">Valid Single Message Signature</a>
+<a href="#section-6.2.3.3" class="section-number selfRef">6.2.3.3. </a><a href="#name-valid-single-message-signat" class="section-name selfRef">Valid Single Message Signature</a>
             </h5>
-<p id="section-6.2.1.3-1">Using the following message<a href="#section-6.2.1.3-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.3-2">
+<p id="section-6.2.3.3-1">Using the following message<a href="#section-6.2.3.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.3-2">
 <pre>9872ad089e452c7b6e283dfac2a80d58e8d0ff71cc4d5e310a1debdda4a45f02
-</pre><a href="#section-6.2.1.3-2" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2.1.3-3">Along with the SK value as defined in <a href="#key-pair" class="xref">Section 6.2.1.2</a> as inputs into the Sign operations, yields the following output signature<a href="#section-6.2.1.3-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.3-4">
+<p id="section-6.2.3.3-3">Along with the SK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Sign operations, yields the following output signature<a href="#section-6.2.3.3-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.3-4">
 <pre>aacb0e0ccc477de9408ec18810b508abccb975e2c8099ea93ba28bf66c836ac31189097446c5c5b67d6aa6aa1a5e01a45d2ee5348010e06d0e9ce7c0737e0e2cd40f270d3fec47e85f6900bce168c0701b87c0afae739823481f3de17823587bec26d5716a3d893a24d996396eca139e
-</pre><a href="#section-6.2.1.3-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.3-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="valid-multi-message-signature">
-<section id="section-6.2.1.4">
+<section id="section-6.2.3.4">
             <h5 id="name-valid-multi-message-signatu">
-<a href="#section-6.2.1.4" class="section-number selfRef">6.2.1.4. </a><a href="#name-valid-multi-message-signatu" class="section-name selfRef">Valid Multi-Message Signature</a>
+<a href="#section-6.2.3.4" class="section-number selfRef">6.2.3.4. </a><a href="#name-valid-multi-message-signatu" class="section-name selfRef">Valid Multi-Message Signature</a>
             </h5>
-<p id="section-6.2.1.4-1">Using the following messages (<strong>Note</strong> the ordering of the messages MUST be preserved)<a href="#section-6.2.1.4-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.4-2">
+<p id="section-6.2.3.4-1">Using the following messages (<strong>Note</strong> the ordering of the messages MUST be preserved)<a href="#section-6.2.3.4-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.4-2">
 <pre>9872ad089e452c7b6e283dfac2a80d58e8d0ff71cc4d5e310a1debdda4a45f02
 
 38376138626436353664343965653037623831313065316438666434663164636566366662396263333638633439326439626338633466393861373339616336
@@ -2820,12 +2881,12 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 37333732653964616135656433316536636435633832356561633162383535653834343736613164393439333261613334386530376237333230393132343136
 
 63333434313336643961623032646134646435393038626262613931336165366635386332636338343462383032613666383131663566623037356639623830
-</pre><a href="#section-6.2.1.4-2" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.4-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2.1.4-3">Along with the SK value as defined in <a href="#key-pair" class="xref">Section 6.2.1.2</a> as inputs into the Sign operations, yields the following output signature<a href="#section-6.2.1.4-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.1.4-4">
+<p id="section-6.2.3.4-3">Along with the SK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Sign operations, yields the following output signature<a href="#section-6.2.3.4-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.4-4">
 <pre>89f61a400283385ab6d6233e9a7c4659e1822e280d4b9a0ba9ec867faa59a4ff27f44d956a3f2e297236342d7419a4c758385744297a55459c3a18c5ed76601e0c2226da1a95df39f9be2bbf2311b46859482c85ba0b109d5fa9b7cbaf90f9b8bc78f506666c9e64f14490441669ccc5
-</pre><a href="#section-6.2.1.4-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.2.3.4-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2881,6 +2942,10 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 <dt id="RFC8017">[RFC8017]</dt>
       <dd>
 <span class="refAuthor">Moriarty, K., Ed.</span>, <span class="refAuthor">Kaliski, B.</span>, <span class="refAuthor">Jonsson, J.</span>, and <span class="refAuthor">A. Rusch</span>, <span class="refTitle">"PKCS #1: RSA Cryptography Specifications Version 2.2"</span>, <span class="seriesInfo">RFC 8017</span>, <span class="seriesInfo">DOI 10.17487/RFC8017</span>, <time datetime="2016-11" class="refDate">November 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8017">https://www.rfc-editor.org/info/rfc8017</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SHA2">[SHA2]</dt>
+      <dd>
+<span class="refAuthor">NIST</span>, <span class="refTitle">"Secure Hash Standard (SHS)"</span>, <span>&lt;<a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf">https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SHA3">[SHA3]</dt>
     <dd>
@@ -3043,7 +3108,7 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 <pre>aacb0e0ccc477de9408ec18810b508abccb975e2c8099ea93ba28bf66c836ac31189097446c5c5b67d6aa6aa1a5e01a45d2ee5348010e06d0e9ce7c0737e0e2cd40f270d3fec47e85f6900bce168c0701b87c0afae739823481f3de17823587bec26d5716a3d893a24d996396eca139e
 </pre><a href="#appendix-C.1-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.1-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.1.2</a> as inputs into the Verify operation should fail signature validation due to the message value being different from what was signed<a href="#appendix-C.1-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.1-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to the message value being different from what was signed<a href="#appendix-C.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="extra-unsigned-message-signature">
@@ -3063,7 +3128,7 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 <pre>aacb0e0ccc477de9408ec18810b508abccb975e2c8099ea93ba28bf66c836ac31189097446c5c5b67d6aa6aa1a5e01a45d2ee5348010e06d0e9ce7c0737e0e2cd40f270d3fec47e85f6900bce168c0701b87c0afae739823481f3de17823587bec26d5716a3d893a24d996396eca139e
 </pre><a href="#appendix-C.2-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.2-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.1.2</a> as inputs into the Verify operation should fail signature validation due to an additional message being supplied that was not signed<a href="#appendix-C.2-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.2-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to an additional message being supplied that was not signed<a href="#appendix-C.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="missing-message-signature">
@@ -3083,7 +3148,7 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 <pre>89f61a400283385ab6d6233e9a7c4659e1822e280d4b9a0ba9ec867faa59a4ff27f44d956a3f2e297236342d7419a4c758385744297a55459c3a18c5ed76601e0c2226da1a95df39f9be2bbf2311b46859482c85ba0b109d5fa9b7cbaf90f9b8bc78f506666c9e64f14490441669ccc5
 </pre><a href="#appendix-C.3-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.3-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.1.2</a> as inputs into the Verify operation should fail signature validation due to missing messages that were originally present during the signing<a href="#appendix-C.3-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.3-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to missing messages that were originally present during the signing<a href="#appendix-C.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="reordered-message-signature">
@@ -3119,7 +3184,7 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 <pre>89f61a400283385ab6d6233e9a7c4659e1822e280d4b9a0ba9ec867faa59a4ff27f44d956a3f2e297236342d7419a4c758385744297a55459c3a18c5ed76601e0c2226da1a95df39f9be2bbf2311b46859482c85ba0b109d5fa9b7cbaf90f9b8bc78f506666c9e64f14490441669ccc5
 </pre><a href="#appendix-C.4-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.4-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.1.2</a> as inputs into the Verify operation should fail signature validation due to messages being re-ordered from the order in which they were signed<a href="#appendix-C.4-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.4-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to messages being re-ordered from the order in which they were signed<a href="#appendix-C.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="wrong-public-key-signature">
@@ -3155,7 +3220,7 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 <pre>89f61a400283385ab6d6233e9a7c4659e1822e280d4b9a0ba9ec867faa59a4ff27f44d956a3f2e297236342d7419a4c758385744297a55459c3a18c5ed76601e0c2226da1a95df39f9be2bbf2311b46859482c85ba0b109d5fa9b7cbaf90f9b8bc78f506666c9e64f14490441669ccc5
 </pre><a href="#appendix-C.5-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.5-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.1.2</a> as inputs into the Verify operation should fail signature validation due to public key used to verify is in-correct<a href="#appendix-C.5-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.5-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to public key used to verify is in-correct<a href="#appendix-C.5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
