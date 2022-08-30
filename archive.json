@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-08-28T00:13:11.581943+00:00",
+  "timestamp": "2022-08-30T00:11:38.053139+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -25952,13 +25952,13 @@
       "labels": [],
       "body": "Closes #194\r\n\r\nI also updated the definition of the `ciphersuite_id` to be a ASCII string, instead of an octet string. This makes it easier to concatenate it with other strings to create DSTs which will then become octet strings using `utf8()`.\r\n\r\nLastly, I'm passing the inputted message in `MapMessageToScalarAsHash` directly to `hash_to_scalar` because I don't see a reason to append it with each length anymore, since we are using `expand_message`",
       "createdAt": "2022-08-19T15:48:58Z",
-      "updatedAt": "2022-08-22T19:18:52Z",
+      "updatedAt": "2022-08-29T22:37:44Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "4e7cff0f246eeedc9b8736fde11b0ae73588e199",
       "headRepository": "BasileiosKal/bbs-signature",
       "headRefName": "hash-to-scalar",
-      "headRefOid": "09a0c0791a744725ad736e06bcac90fb1cbd463e",
+      "headRefOid": "d8537755b2d698cf6224a32f31be07a44fefd68c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -25970,33 +25970,96 @@
           "body": "Discussed on the WG call of the 22nd of August. Will need to make the DST formats consistent across operations. Will use octet-strings for the DSTs and have them default to `utf8(default_dst)`.",
           "createdAt": "2022-08-22T18:17:27Z",
           "updatedAt": "2022-08-22T19:18:52Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call 29th August, awaiting updates and re-review.",
+          "createdAt": "2022-08-29T18:37:09Z",
+          "updatedAt": "2022-08-29T18:37:09Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOF8lax85A6rID",
+          "commit": {
+            "abbreviatedOid": "abe2415"
+          },
+          "author": "andrewwhitehead",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-08-29T17:44:33Z",
+          "updatedAt": "2022-08-29T17:44:33Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "I don't think the DST needs to be defined as 'ASCII encoded' here, as technically any octet string is accepted.",
+              "createdAt": "2022-08-29T17:44:33Z",
+              "updatedAt": "2022-08-29T17:44:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85A7lbg",
+          "commit": {
+            "abbreviatedOid": "abe2415"
+          },
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-08-29T21:12:08Z",
+          "updatedAt": "2022-08-29T21:12:08Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "Done. Thanks!",
+              "createdAt": "2022-08-29T21:12:08Z",
+              "updatedAt": "2022-08-29T21:12:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85A711p",
+          "commit": {
+            "abbreviatedOid": "d853775"
+          },
+          "author": "andrewwhitehead",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-08-29T22:37:44Z",
+          "updatedAt": "2022-08-29T22:37:44Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 213,
       "id": "PR_kwDOF8lax849eePO",
       "title": "Add sha256 ciphersuite",
       "url": "https://github.com/decentralized-identity/bbs-signature/pull/213",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "BasileiosKal",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Adding a sha256 based suite alongside the existing shake256 based one.",
       "createdAt": "2022-08-19T17:19:05Z",
-      "updatedAt": "2022-08-26T10:21:01Z",
+      "updatedAt": "2022-08-29T18:33:06Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "0523774c6f573dedb65f4e248fc24d7600aa9988",
       "headRepository": "BasileiosKal/bbs-signature",
       "headRefName": "sha256_suite",
       "headRefOid": "c3cefcb34d551033502ad359e3210a7c90eba6a7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-08-29T18:33:06Z",
+      "mergedAt": "2022-08-29T18:33:06Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "9276b6f8c175672bdf52fd628308174e9be53695"
+      },
       "comments": [
         {
           "author": "BasileiosKal",
@@ -26004,6 +26067,13 @@
           "body": "Discussed on the WG call on the 22nd of August. Will update based on Andrew's review!",
           "createdAt": "2022-08-22T18:20:02Z",
           "updatedAt": "2022-08-22T19:17:55Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call 30th August, multiple approvals, merging.",
+          "createdAt": "2022-08-29T18:32:59Z",
+          "updatedAt": "2022-08-29T18:32:59Z"
         }
       ],
       "reviews": [
@@ -26026,6 +26096,32 @@
               "updatedAt": "2022-08-22T18:20:52Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85A6pfC",
+          "commit": {
+            "abbreviatedOid": "c3cefcb"
+          },
+          "author": "andrewwhitehead",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-08-29T17:40:27Z",
+          "updatedAt": "2022-08-29T17:40:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOF8lax85A645l",
+          "commit": {
+            "abbreviatedOid": "c3cefcb"
+          },
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-08-29T18:30:03Z",
+          "updatedAt": "2022-08-29T18:30:03Z",
+          "comments": []
         }
       ]
     }
