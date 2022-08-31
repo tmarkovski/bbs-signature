@@ -12,10 +12,10 @@
 <meta content="
        BBS is a digital signature scheme categorized as a form of short group signature that supports several unique properties. Notably, the scheme supports signing multiple messages whilst producing a single output digital signature. Through this capability, the possessor of a signature is able to generate proofs that selectively disclose subsets of the originally signed set of messages, whilst preserving the verifiable authenticity and integrity of the messages. Furthermore, these proofs are said to be zero-knowledge in nature as they do not reveal the underlying signature; instead, what they reveal is a proof of knowledge of the undisclosed signature. 
     " name="description">
-<meta content="xml2rfc 3.14.0" name="generator">
+<meta content="xml2rfc 3.14.2" name="generator">
 <meta content="draft-looker-cfrg-bbs-signatures-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.14.0
+  xml2rfc 3.14.2
     Python 3.10.5
     appdirs 1.4.4
     ConfigArgParse 1.5.3
@@ -1041,7 +1041,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 2 March 2023</td>
+<td class="center">Expires 4 March 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1054,12 +1054,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-looker-cfrg-bbs-signatures-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-08-29" class="published">29 August 2022</time>
+<time datetime="2022-08-31" class="published">31 August 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-03-02">2 March 2023</time></dd>
+<dd class="expires"><time datetime="2023-03-04">4 March 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1113,7 +1113,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 March 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 March 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2126,16 +2126,17 @@ Procedure:
           <h4 id="name-mapmessagetoscalarashash">
 <a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-mapmessagetoscalarashash" class="section-name selfRef">MapMessageToScalarAsHash</a>
           </h4>
-<p id="section-4.2.1-1">This operation takes an input message and maps it to a scalar value via a cryptographic hash function for the given curve.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-1">This operation takes an input message and maps it to a scalar value via a cryptographic hash function for the given curve. The operation takes also as an optional input a domain separation tag (dst). If a dst is not supplied, its value MUST default to the octet string returned from utf8(ciphersuite_id || "MAP_MSG_TO_SCALAR_AS_HASH_"), where ciphersuite_id is the ASCII string representing the unique ID of the ciphersuite.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.2.1-2">
 <pre>result = MapMessageToScalarAsHash(msg, dst)
 
 Inputs:
 
 - msg (REQUIRED), octet string.
-- dst (REQUIRED), octet string. Domain separation tag; note this is not
-                  defined as a function argument as per
-                  [@!I-D.irtf-cfrg-hash-to-curve] but as a parameter.
+- dst (OPTIONAL), an octet string representing a domain separation tag.
+                  If not supplied, it default to the octet string
+                  utf8(ciphersuite_id || "MAP_MSG_TO_SCALAR_AS_HASH_")
+                  where ciphersuite_id is defined by the ciphersuite.
 
 Outputs:
 
@@ -2143,11 +2144,10 @@ Outputs:
 
 Procedure:
 
-1. If length(dst) &gt; 2^8 - 1 or length(msg) &gt; 2^64 - 1, return INVALID
-2. dst_prime = I2OSP(length(dst), 1) || dst
-3. msg_prime = I2OSP(length(msg), 8) || msg
-4. result = hash_to_scalar(msg_prime || dst_prime, 1)
-5. return result
+1. msg_for_hash = encode_for_hash(msg)
+2. if msg_for_hash is INVALID, return INVALID
+3. if length(dst) &gt; 255, return INVALID
+4. return hash_to_scalar(msg_for_hash, 1, dst)
 </pre><a href="#section-4.2.1-2" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2160,15 +2160,20 @@ Procedure:
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-hash-to-scalar" class="section-name selfRef">Hash to Scalar</a>
         </h3>
 <p id="section-4.3-1">This operation describes how to hash an arbitrary octet string to <code>n</code> scalar values in the multiplicative group of integers mod r (i.e., values in the range [1, r-1]).  This procedure acts as a helper function, used internally in various places within the operations described in the spec. To map a message to a scalar that would be passed as input to the <a href="#sign">Sign</a>, <a href="#verify">Verify</a>, <a href="#proofgen">ProofGen</a> and <a href="#proofverify">ProofVerify</a> functions, one must use <a href="#mapmessagetoscalar">MapMessageToScalarAsHash</a> instead.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.3-2">This operation makes use of expand_message defined in <span>[<a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">I-D.irtf-cfrg-hash-to-curve</a>]</span>, in a similar way used by the hash_to_field operation of Section 5 from the same document (with the additional checks for getting a scalar that is 0). Note that, if an implementer wants to use hash_to_field instead, they MUST use the multiplicative group of integers mod r (Fr), as the target group (F). However, the hash_to_curve ciphersuites used by this document, make use of hash_to_field with the target group being the multiplicative group of integers mod p (Fp). For completeness, we define here the operation making use of the expand_message function, that will be defined by the hash-to-curve suite used. If someone also has a hash_to_field implementation available, with the target group been Fr, they can use this instead (adding the check for a scalar been 0).<a href="#section-4.3-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4.3-3">
-<pre>scalars = hash_to_scalar(msg_octets, count)
+<p id="section-4.3-2">This operation makes use of expand_message defined in <span>[<a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">I-D.irtf-cfrg-hash-to-curve</a>]</span>, in a similar way used by the hash_to_field operation of Section 5 from the same document (with the additional checks for getting a scalar that is 0). If an implementer wants to use hash_to_field instead, they MUST use the multiplicative group of integers mod r (Fr), as the target group (F). Note however, that the hash_to_curve document, makes use of hash_to_field with the target group being the multiplicative group of integers mod p (Fp). For this reason, we don't directly use hash_to_field here, rather we define a similar operation (hash_to_scalar), making direct use of the expand_message function, that will be defined by the hash-to-curve suite used (i.e., either expand_message_xmd or expand_message_xof). If someone also has a hash_to_field implementation available, with the target group been Fr, they can use this instead (adding the check for a scalar been 0).<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.3-3">The operation takes as input an octet string representing the message to hash (msg), the number of the scalars to return (count) as well as an optional domain separation tag (dst). If a dst is not supplied, its value MUST default to the octet string returned from utf8(ciphersuit_id || "H2S_"), where ciphersuite_id is the ASCII string representing the unique ID of the ciphersuite.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.3-4">
+<pre>scalars = hash_to_scalar(msg_octets, count, dst)
 
 Inputs:
 
 - msg_octets (REQUIRED), octet string. The message to be hashed.
 - count (REQUIRED), an integer greater or equal to 1. The number of
                     scalars to output.
+- dst (OPTIONAL), an octet string representing a domain separation tag.
+                  If not supplied, it defaults to the octet string given
+                  by utf8(ciphersuite_id || "H2S_"), where
+                  ciphersuite_id is defined by the ciphersuite.
 
 Parameters:
 
@@ -2179,8 +2184,6 @@ Parameters:
 
 Definitions:
 
-- h2s_dst, the octet string representing the ASCII encoded characters:
-           "BBS_" || hash_to_curve_suite || "HASH_TO_SCALAR_".
 - expand_len = ceil((ceil(log2(r))+k)/8), where r and k are defined by
                                           the ciphersuite.
 
@@ -2193,7 +2196,7 @@ Procedure:
 1.  len_in_bytes = count * expand_len
 2.  t = 0
 3.  msg_prime = msg_octets || I2OSP(t, 1) || I2OSP(count, 4)
-4.  uniform_bytes = expand_message(msg_prime, h2s_dst, len_in_bytes)
+4.  uniform_bytes = expand_message(msg_prime, dst, len_in_bytes)
 5.  for i in (1, ..., count):
 6.      tv = uniform_bytes[(i-1)*expand_len..i*expand_len-1]
 7.      scalar_i = OS2IP(tv) mod r
@@ -2201,7 +2204,7 @@ Procedure:
 9.      t = t + 1
 10.     go back to step 3
 11. return (scalar_1, ..., scalar_count)
-</pre><a href="#section-4.3-3" class="pilcrow">¶</a>
+</pre><a href="#section-4.3-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2607,13 +2610,10 @@ Procedure:
 </div>
 <ul class="normal">
 <li class="normal" id="section-6.1.1-3.1">
-              <p id="section-6.1.1-3.1.1">Strings in double quotes are ASCII-encoded literals.<a href="#section-6.1.1-3.1.1" class="pilcrow">¶</a></p>
+              <p id="section-6.1.1-3.1.1">H2C_SUITE_ID is the suite ID of the hash-to-curve suite used to define the hash<em>to</em>curve function.<a href="#section-6.1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6.1.1-3.2">
-              <p id="section-6.1.1-3.2.1">H2C_SUITE_ID is the suite ID of the hash-to-curve suite used to define the hash<em>to</em>curve function.<a href="#section-6.1.1-3.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-6.1.1-3.3">
-              <p id="section-6.1.1-3.3.1">ADD_INFO is an optional string indicating any additional information used to uniquely qualify the ciphersuite. When present this value MUST only contain ASCII characters between 0x21 and 0x7e (inclusive), and MUST end with an underscore (0x5f), other than the last character the string MUST not contain any other underscores (0x5f).<a href="#section-6.1.1-3.3.1" class="pilcrow">¶</a></p>
+              <p id="section-6.1.1-3.2.1">ADD_INFO is an optional string indicating any additional information used to uniquely qualify the ciphersuite. When present this value MUST only contain ASCII characters with codes between 0x21 and 0x7e (inclusive) and MUST end with an underscore (ASCII code: 0x5f), other than the last character the string MUST not contain any other underscores (ASCII code: 0x5f).<a href="#section-6.1.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2684,7 +2684,7 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
 <p id="section-6.2.1-1"><strong>Basic parameters</strong>:<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2.1-2.1">
-              <p id="section-6.2.1-2.1.1">Ciphersuite_ID: "BBS_BLS12381G1_XOF:SHAKE-256_SSWU_RO_"<a href="#section-6.2.1-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-6.2.1-2.1.1">ciphersuite_id: "BBS_BLS12381G1_XOF:SHAKE-256_SSWU_RO_"<a href="#section-6.2.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6.2.1-2.2">
               <p id="section-6.2.1-2.2.1">hash: SHAKE-256 as defined in <span>[<a href="#SHA3" class="xref">SHA3</a>]</span>.<a href="#section-6.2.1-2.2.1" class="pilcrow">¶</a></p>
@@ -2921,11 +2921,11 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 <dl class="references">
 <dt id="I-D.irtf-cfrg-hash-to-curve">[I-D.irtf-cfrg-hash-to-curve]</dt>
       <dd>
-<span class="refAuthor">Faz-Hernandez, A.</span>, <span class="refAuthor">Scott, S.</span>, <span class="refAuthor">Sullivan, N.</span>, <span class="refAuthor">Wahby, R. S.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Hashing to Elliptic Curves"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-hash-to-curve-16</span>, <time datetime="2022-06-15" class="refDate">15 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/api/v1/doc/document/draft-irtf-cfrg-hash-to-curve/">https://datatracker.ietf.org/api/v1/doc/document/draft-irtf-cfrg-hash-to-curve/</a>&gt;</span>. </dd>
+<span class="refAuthor">Faz-Hernandez, A.</span>, <span class="refAuthor">Scott, S.</span>, <span class="refAuthor">Sullivan, N.</span>, <span class="refAuthor">Wahby, R. S.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Hashing to Elliptic Curves"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-hash-to-curve-16</span>, <time datetime="2022-06-15" class="refDate">15 June 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-hash-to-curve-16.txt">https://www.ietf.org/archive/id/draft-irtf-cfrg-hash-to-curve-16.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-pairing-friendly-curves">[I-D.irtf-cfrg-pairing-friendly-curves]</dt>
       <dd>
-<span class="refAuthor">Sakemi, Y.</span>, <span class="refAuthor">Kobayashi, T.</span>, <span class="refAuthor">Saito, T.</span>, and <span class="refAuthor">R. S. Wahby</span>, <span class="refTitle">"Pairing-Friendly Curves"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-pairing-friendly-curves-10</span>, <time datetime="2021-07-30" class="refDate">30 July 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/api/v1/doc/document/draft-irtf-cfrg-pairing-friendly-curves/">https://datatracker.ietf.org/api/v1/doc/document/draft-irtf-cfrg-pairing-friendly-curves/</a>&gt;</span>. </dd>
+<span class="refAuthor">Sakemi, Y.</span>, <span class="refAuthor">Kobayashi, T.</span>, <span class="refAuthor">Saito, T.</span>, and <span class="refAuthor">R. S. Wahby</span>, <span class="refTitle">"Pairing-Friendly Curves"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-pairing-friendly-curves-10</span>, <time datetime="2021-07-30" class="refDate">30 July 2021</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-pairing-friendly-curves-10.txt">https://www.ietf.org/archive/id/draft-irtf-cfrg-pairing-friendly-curves-10.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
@@ -2984,7 +2984,7 @@ ab19bd40525e36bb4e132378e0596f21b32d7455de969862f3a48864eb9e2dd4c1e8bc903ceea686
 <dd class="break"></dd>
 <dt id="I-D.irtf-cfrg-bls-signature">[I-D.irtf-cfrg-bls-signature]</dt>
       <dd>
-<span class="refAuthor">Boneh, D.</span>, <span class="refAuthor">Gorbunov, S.</span>, <span class="refAuthor">Wahby, R. S.</span>, <span class="refAuthor">Wee, H.</span>, <span class="refAuthor">Wood, C. A.</span>, and <span class="refAuthor">Z. Zhang</span>, <span class="refTitle">"BLS Signatures"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bls-signature-05</span>, <time datetime="2022-06-16" class="refDate">16 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/api/v1/doc/document/draft-irtf-cfrg-bls-signature/">https://datatracker.ietf.org/api/v1/doc/document/draft-irtf-cfrg-bls-signature/</a>&gt;</span>. </dd>
+<span class="refAuthor">Boneh, D.</span>, <span class="refAuthor">Gorbunov, S.</span>, <span class="refAuthor">Wahby, R. S.</span>, <span class="refAuthor">Wee, H.</span>, <span class="refAuthor">Wood, C. A.</span>, and <span class="refAuthor">Z. Zhang</span>, <span class="refTitle">"BLS Signatures"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-bls-signature-05</span>, <time datetime="2022-06-16" class="refDate">16 June 2022</time>, <span>&lt;<a href="https://www.ietf.org/archive/id/draft-irtf-cfrg-bls-signature-05.txt">https://www.ietf.org/archive/id/draft-irtf-cfrg-bls-signature-05.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ZCASH-REVIEW">[ZCASH-REVIEW]</dt>
     <dd>
