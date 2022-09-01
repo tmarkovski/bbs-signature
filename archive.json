@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-08-30T00:11:38.053139+00:00",
+  "timestamp": "2022-09-01T00:11:08.633286+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -4184,7 +4184,7 @@
       "id": "I_kwDOF8lax85J0ceJ",
       "title": "H2C using SHA256",
       "url": "https://github.com/decentralized-identity/bbs-signature/issues/143",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "BasileiosKal",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -4194,8 +4194,8 @@
       ],
       "body": "Currently the spec creates generators using hash-to-curve implemented with `shake256` (for which we describe a h2c ciphersuite).\r\n\r\nLooking at implementations of pairing-friendly-curves though, most of them seem to natively support h2c with `sha256` (like blst). This means that,\r\n1. We may have to implement h2c with `shake256` our self's.\r\n2. Applications that elect to use the natively supported h2c implementation (and will be many of those most likely) will create generators that are not interoperable with the ones we describe in the spec.\r\n\r\nAt the very least we may be creating an implementation barrier by making it hard to use `sha256` for h2c.\r\n\r\nSince efficiency is not an issue when creating generators, and taking into account the wider spread of `sha256`, should we update h2c to use `sha` instead of `shake`?? We can leave the ciphersuite definition for h2c using `shake256` as an alternative, while the bls12-381 ciphersuite will use h2c with `sha256`??",
       "createdAt": "2022-05-17T11:18:01Z",
-      "updatedAt": "2022-08-15T18:16:15Z",
-      "closedAt": null,
+      "updatedAt": "2022-08-30T07:26:21Z",
+      "closedAt": "2022-08-30T07:26:20Z",
       "comments": [
         {
           "author": "BasileiosKal",
@@ -4329,6 +4329,13 @@
           "body": "DIscussed on 15th of August WG call, based on implementation feedback we are going to define a SHA256 based ciphersuite to support further discussion around it.",
           "createdAt": "2022-08-15T18:16:15Z",
           "updatedAt": "2022-08-15T18:16:15Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Resolved in #213 ",
+          "createdAt": "2022-08-30T07:26:20Z",
+          "updatedAt": "2022-08-30T07:26:20Z"
         }
       ]
     },
@@ -5011,7 +5018,7 @@
       "id": "I_kwDOF8lax85NFoRb",
       "title": "expand_message domain separation",
       "url": "https://github.com/decentralized-identity/bbs-signature/issues/194",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "BasileiosKal",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -5021,8 +5028,8 @@
       ],
       "body": "The current hash_to_scalar construction does not allow for the calling operation to define the DST that will go into the underlying expand_message used. Some operations that need additional domain separation append the DST to the message.\r\n\r\nThe problem is that we cannot prove indistinguishably that way. For example consider the following, lets assume that in a protocol we call hash_to_scalar in the input `msg ||  I2OSP(length(DST2), 1) || DST2` and get `b_1, b_2, ...` where,\r\n\r\n```\r\nb_0 = H(Z_pad || msg ||  I2OSP(length(DST2), 1) || DST2 || I2OSP(len_in_bytes, 2) || I2OSP(0, 1) || DST_prime)\r\nb_1 = H(b_0 || ...)\r\nb_2 = ....\r\n```\r\nThen, in some other place, the protocol returns `h2 = H(Z_pad || msg || I2OSP(length(DST2), 1) || DST2)`. In that case, after observing `h2` I could do a length-extension attack on H, calculate `b_0` and then `b_1`, `b_2` etc. This is not really a practical issue (it becomes less practical -but not impossible- if we also consider padding), but it does stop us from proving security. It also becomes a larger issue if people use a different expand_message (if they just use sha512 with a counter for example).\r\n\r\n## Proposed Solutions\r\n### Solution A\r\nThe currently proposed solution, discussed in the WG call, would be to define an additional optional argument to hash_to_scalar like `dstInfo` and append that to the DST already defined. i.e., inside hash_to_scalar calculate,\r\n```\r\n4. dst_prime = DST || dstInfo || I2OSP(length(dstInfo), 1)\r\n5. expand_message(msg, dst_prime, len_in_bytes)\r\n```\r\nThis is a bit weird because we are prepending the length everywhere else in the spec. However, if we do the same here and calculate `dst_prime = DST || I2SOP(length(dstIfo), 1) || dstInfo` then for example the pairs `DST1 = [4, 2]`, `dstInfo1 = [2]` and `DST2 = [4]`, `dstInfo2 = [1, 2]` will give the same `dst_prime`. \r\n\r\nSimilarly, we can't just concatenate the 2 (i.e., `dst_prime = DST || dstInfo`) because then for example the pairs `DST1 = [1, 2]`, `dstInfo1 = [3]` and `DST2 = [1]`, `dstInfo2 = [2, 3]` will again give the same `dst_prime`\r\n\r\n### Solution B\r\nDon't define the DST in hash_to_scalar but require it as an input. So whatever operation calls hash_to_scalar will also need to specify a DST value to pass it. This is probably the most efficient approach when it comes to a straight line implementation, but IMO the \"ugliest\" looking when it comes to the spec.",
       "createdAt": "2022-07-04T15:35:54Z",
-      "updatedAt": "2022-08-15T18:40:15Z",
-      "closedAt": null,
+      "updatedAt": "2022-08-31T02:25:38Z",
+      "closedAt": "2022-08-31T02:25:38Z",
       "comments": [
         {
           "author": "BasileiosKal",
@@ -25945,24 +25952,26 @@
       "id": "PR_kwDOF8lax849eKRr",
       "title": "Add DST as input to hash_to_scalar",
       "url": "https://github.com/decentralized-identity/bbs-signature/pull/211",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "BasileiosKal",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #194\r\n\r\nI also updated the definition of the `ciphersuite_id` to be a ASCII string, instead of an octet string. This makes it easier to concatenate it with other strings to create DSTs which will then become octet strings using `utf8()`.\r\n\r\nLastly, I'm passing the inputted message in `MapMessageToScalarAsHash` directly to `hash_to_scalar` because I don't see a reason to append it with each length anymore, since we are using `expand_message`",
       "createdAt": "2022-08-19T15:48:58Z",
-      "updatedAt": "2022-08-29T22:37:44Z",
+      "updatedAt": "2022-08-31T02:25:37Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "4e7cff0f246eeedc9b8736fde11b0ae73588e199",
       "headRepository": "BasileiosKal/bbs-signature",
       "headRefName": "hash-to-scalar",
       "headRefOid": "d8537755b2d698cf6224a32f31be07a44fefd68c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-08-31T02:25:37Z",
+      "mergedAt": "2022-08-31T02:25:37Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "1dbf27eab59c6fff1993940457d114cc22e15116"
+      },
       "comments": [
         {
           "author": "BasileiosKal",
@@ -25977,6 +25986,13 @@
           "body": "Discussed on WG call 29th August, awaiting updates and re-review.",
           "createdAt": "2022-08-29T18:37:09Z",
           "updatedAt": "2022-08-29T18:37:09Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Multiple approvals, discussed on WG call, merging",
+          "createdAt": "2022-08-31T02:25:32Z",
+          "updatedAt": "2022-08-31T02:25:32Z"
         }
       ],
       "reviews": [
@@ -26031,6 +26047,19 @@
           "body": "",
           "createdAt": "2022-08-29T22:37:44Z",
           "updatedAt": "2022-08-29T22:37:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOF8lax85BCrva",
+          "commit": {
+            "abbreviatedOid": "d853775"
+          },
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-08-31T02:25:13Z",
+          "updatedAt": "2022-08-31T02:25:13Z",
           "comments": []
         }
       ]
