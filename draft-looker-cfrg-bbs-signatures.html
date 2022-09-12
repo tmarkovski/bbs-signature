@@ -1362,6 +1362,9 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.5">
                 <p id="section-toc.1-1.13.2.5.1"><a href="#appendix-C.5" class="xref">C.5</a>.  <a href="#name-wrong-public-key-signature" class="xref">Wrong Public Key Signature</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.6">
+                <p id="section-toc.1-1.13.2.6.1"><a href="#appendix-C.6" class="xref">C.6</a>.  <a href="#name-wrong-public-key-signature-2" class="xref">Wrong Public Key Signature</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
@@ -2847,15 +2850,20 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
             <h5 id="name-valid-single-message-signat">
 <a href="#section-6.2.3.3" class="section-number selfRef">6.2.3.3. </a><a href="#name-valid-single-message-signat" class="section-name selfRef">Valid Single Message Signature</a>
             </h5>
-<p id="section-6.2.3.3-1">Using the following message<a href="#section-6.2.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.3.3-1">Using the following header<a href="#section-6.2.3.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.2.3.3-2">
-<pre>{{ $signatureFixtures.signature001.messages[0] }}
+<pre>{{ $signatureFixtures.signature001.header }}
 </pre><a href="#section-6.2.3.3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2.3.3-3">Along with the SK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Sign operations, yields the following output signature<a href="#section-6.2.3.3-3" class="pilcrow">¶</a></p>
+<p id="section-6.2.3.3-3">And the following message<a href="#section-6.2.3.3-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.2.3.3-4">
-<pre>{{ $signatureFixtures.signature001.signature }}
+<pre>{{ $signatureFixtures.signature001.messages[0] }}
 </pre><a href="#section-6.2.3.3-4" class="pilcrow">¶</a>
+</div>
+<p id="section-6.2.3.3-5">Along with the SK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Sign operations, yields the following output signature<a href="#section-6.2.3.3-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.3-6">
+<pre>{{ $signatureFixtures.signature001.signature }}
+</pre><a href="#section-6.2.3.3-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2864,8 +2872,13 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
             <h5 id="name-valid-multi-message-signatu">
 <a href="#section-6.2.3.4" class="section-number selfRef">6.2.3.4. </a><a href="#name-valid-multi-message-signatu" class="section-name selfRef">Valid Multi-Message Signature</a>
             </h5>
-<p id="section-6.2.3.4-1">Using the following messages (<strong>Note</strong> the ordering of the messages MUST be preserved)<a href="#section-6.2.3.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.3.4-1">Using the following header<a href="#section-6.2.3.4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.2.3.4-2">
+<pre>{{ $signatureFixtures.signature004.header }}
+</pre><a href="#section-6.2.3.4-2" class="pilcrow">¶</a>
+</div>
+<p id="section-6.2.3.4-3">And the following messages (<strong>Note</strong> the ordering of the messages MUST be preserved)<a href="#section-6.2.3.4-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.4-4">
 <pre>{{ $signatureFixtures.signature004.messages[0] }}
 
 {{ $signatureFixtures.signature004.messages[1] }}
@@ -2885,12 +2898,12 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
 {{ $signatureFixtures.signature004.messages[8] }}
 
 {{ $signatureFixtures.signature004.messages[9] }}
-</pre><a href="#section-6.2.3.4-2" class="pilcrow">¶</a>
-</div>
-<p id="section-6.2.3.4-3">Along with the SK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Sign operations, yields the following output signature<a href="#section-6.2.3.4-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2.3.4-4">
-<pre>{{ $signatureFixtures.signature004.signature }}
 </pre><a href="#section-6.2.3.4-4" class="pilcrow">¶</a>
+</div>
+<p id="section-6.2.3.4-5">Along with the SK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Sign operations, yields the following output signature<a href="#section-6.2.3.4-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2.3.4-6">
+<pre>{{ $signatureFixtures.signature004.signature }}
+</pre><a href="#section-6.2.3.4-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -3102,17 +3115,22 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
         <h3 id="name-modified-message-signature">
 <a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-modified-message-signature" class="section-name selfRef">Modified Message Signature</a>
         </h3>
-<p id="appendix-C.1-1">Using the following message<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.1-1">Using the following header<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.1-2">
-<pre>{{ $signatureFixtures.signature002.messages[0] }}
+<pre>{{ $signatureFixtures.signature002.header }}
 </pre><a href="#appendix-C.1-2" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.1-3">And the following signature<a href="#appendix-C.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-C.1-3">And the following message<a href="#appendix-C.1-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.1-4">
-<pre>{{ $signatureFixtures.signature002.signature }}
+<pre>{{ $signatureFixtures.signature002.messages[0] }}
 </pre><a href="#appendix-C.1-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.1-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to the message value being different from what was signed<a href="#appendix-C.1-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.1-5">And the following signature<a href="#appendix-C.1-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.1-6">
+<pre>{{ $signatureFixtures.signature002.signature }}
+</pre><a href="#appendix-C.1-6" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.1-7">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to the message value being different from what was signed<a href="#appendix-C.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="extra-unsigned-message-signature">
@@ -3120,19 +3138,24 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
         <h3 id="name-extra-unsigned-message-sign">
 <a href="#appendix-C.2" class="section-number selfRef">C.2. </a><a href="#name-extra-unsigned-message-sign" class="section-name selfRef">Extra Unsigned Message Signature</a>
         </h3>
-<p id="appendix-C.2-1">Using the following messages<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.2-1">Using the following header<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.2-2">
+<pre>{{ $signatureFixtures.signature003.header }}
+</pre><a href="#appendix-C.2-2" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.2-3">And the following messages<a href="#appendix-C.2-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.2-4">
 <pre>{{ $signatureFixtures.signature003.messages[0] }}
 
 {{ $signatureFixtures.signature003.messages[1] }}
-</pre><a href="#appendix-C.2-2" class="pilcrow">¶</a>
-</div>
-<p id="appendix-C.2-3">And the following signature<a href="#appendix-C.2-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-C.2-4">
-<pre>{{ $signatureFixtures.signature002.signature }}
 </pre><a href="#appendix-C.2-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.2-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to an additional message being supplied that was not signed<a href="#appendix-C.2-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.2-5">And the following signature<a href="#appendix-C.2-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.2-6">
+<pre>{{ $signatureFixtures.signature002.signature }}
+</pre><a href="#appendix-C.2-6" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.2-7">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to an additional message being supplied that was not signed<a href="#appendix-C.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="missing-message-signature">
@@ -3140,19 +3163,24 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
         <h3 id="name-missing-message-signature">
 <a href="#appendix-C.3" class="section-number selfRef">C.3. </a><a href="#name-missing-message-signature" class="section-name selfRef">Missing Message Signature</a>
         </h3>
-<p id="appendix-C.3-1">Using the following messages<a href="#appendix-C.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.3-1">Using the following header<a href="#appendix-C.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.3-2">
+<pre>{{ $signatureFixtures.signature005.header }}
+</pre><a href="#appendix-C.3-2" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.3-3">And the following messages<a href="#appendix-C.3-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.3-4">
 <pre>{{ $signatureFixtures.signature005.messages[0] }}
 
 {{ $signatureFixtures.signature005.messages[1] }}
-</pre><a href="#appendix-C.3-2" class="pilcrow">¶</a>
-</div>
-<p id="appendix-C.3-3">And the following signature<a href="#appendix-C.3-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-C.3-4">
-<pre>{{ $signatureFixtures.signature005.signature }}
 </pre><a href="#appendix-C.3-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.3-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to missing messages that were originally present during the signing<a href="#appendix-C.3-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.3-5">And the following signature<a href="#appendix-C.3-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.3-6">
+<pre>{{ $signatureFixtures.signature005.signature }}
+</pre><a href="#appendix-C.3-6" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.3-7">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to missing messages that were originally present during the signing<a href="#appendix-C.3-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="reordered-message-signature">
@@ -3160,8 +3188,13 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
         <h3 id="name-reordered-message-signature">
 <a href="#appendix-C.4" class="section-number selfRef">C.4. </a><a href="#name-reordered-message-signature" class="section-name selfRef">Reordered Message Signature</a>
         </h3>
-<p id="appendix-C.4-1">Using the following messages<a href="#appendix-C.4-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.4-1">Using the following header<a href="#appendix-C.4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.4-2">
+<pre>{{ $signatureFixtures.signature006.header }}
+</pre><a href="#appendix-C.4-2" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.4-3">And the following messages<a href="#appendix-C.4-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.4-4">
 <pre>{{ $signatureFixtures.signature006.messages[0] }}
 
 {{ $signatureFixtures.signature006.messages[1] }}
@@ -3181,14 +3214,14 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
 {{ $signatureFixtures.signature006.messages[8] }}
 
 {{ $signatureFixtures.signature006.messages[9] }}
-</pre><a href="#appendix-C.4-2" class="pilcrow">¶</a>
-</div>
-<p id="appendix-C.4-3">And the following signature<a href="#appendix-C.4-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-C.4-4">
-<pre>{{ $signatureFixtures.signature006.signature }}
 </pre><a href="#appendix-C.4-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.4-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to messages being re-ordered from the order in which they were signed<a href="#appendix-C.4-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.4-5">And the following signature<a href="#appendix-C.4-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.4-6">
+<pre>{{ $signatureFixtures.signature006.signature }}
+</pre><a href="#appendix-C.4-6" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.4-7">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to messages being re-ordered from the order in which they were signed<a href="#appendix-C.4-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="wrong-public-key-signature">
@@ -3196,8 +3229,13 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
         <h3 id="name-wrong-public-key-signature">
 <a href="#appendix-C.5" class="section-number selfRef">C.5. </a><a href="#name-wrong-public-key-signature" class="section-name selfRef">Wrong Public Key Signature</a>
         </h3>
-<p id="appendix-C.5-1">Using the following messages<a href="#appendix-C.5-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.5-1">Using the following header<a href="#appendix-C.5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.5-2">
+<pre>{{ $signatureFixtures.signature007.header }}
+</pre><a href="#appendix-C.5-2" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.5-3">And the following messages<a href="#appendix-C.5-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.5-4">
 <pre>{{ $signatureFixtures.signature007.messages[0] }}
 
 {{ $signatureFixtures.signature007.messages[1] }}
@@ -3217,14 +3255,55 @@ a function that returns the point P in the subgroup G2 corresponding to the cano
 {{ $signatureFixtures.signature007.messages[8] }}
 
 {{ $signatureFixtures.signature007.messages[9] }}
-</pre><a href="#appendix-C.5-2" class="pilcrow">¶</a>
-</div>
-<p id="appendix-C.5-3">And the following signature<a href="#appendix-C.5-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-C.5-4">
-<pre>{{ $signatureFixtures.signature007.signature }}
 </pre><a href="#appendix-C.5-4" class="pilcrow">¶</a>
 </div>
-<p id="appendix-C.5-5">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to public key used to verify is in-correct<a href="#appendix-C.5-5" class="pilcrow">¶</a></p>
+<p id="appendix-C.5-5">And the following signature<a href="#appendix-C.5-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.5-6">
+<pre>{{ $signatureFixtures.signature007.signature }}
+</pre><a href="#appendix-C.5-6" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.5-7">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to public key used to verify is in-correct<a href="#appendix-C.5-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="wrong-public-key-signature-1">
+<section id="appendix-C.6">
+        <h3 id="name-wrong-public-key-signature-2">
+<a href="#appendix-C.6" class="section-number selfRef">C.6. </a><a href="#name-wrong-public-key-signature-2" class="section-name selfRef">Wrong Public Key Signature</a>
+        </h3>
+<p id="appendix-C.6-1">Using the following header<a href="#appendix-C.6-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.6-2">
+<pre>{{ $signatureFixtures.signature008.header }}
+</pre><a href="#appendix-C.6-2" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.6-3">And the following messages<a href="#appendix-C.6-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.6-4">
+<pre>{{ $signatureFixtures.signature008.messages[0] }}
+
+{{ $signatureFixtures.signature008.messages[1] }}
+
+{{ $signatureFixtures.signature008.messages[2] }}
+
+{{ $signatureFixtures.signature008.messages[3] }}
+
+{{ $signatureFixtures.signature008.messages[4] }}
+
+{{ $signatureFixtures.signature008.messages[5] }}
+
+{{ $signatureFixtures.signature008.messages[6] }}
+
+{{ $signatureFixtures.signature008.messages[7] }}
+
+{{ $signatureFixtures.signature008.messages[8] }}
+
+{{ $signatureFixtures.signature008.messages[9] }}
+</pre><a href="#appendix-C.6-4" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.6-5">And the following signature<a href="#appendix-C.6-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C.6-6">
+<pre>{{ $signatureFixtures.signature008.signature }}
+</pre><a href="#appendix-C.6-6" class="pilcrow">¶</a>
+</div>
+<p id="appendix-C.6-7">Along with the PK value as defined in <a href="#key-pair" class="xref">Section 6.2.3.2</a> as inputs into the Verify operation should fail signature validation due to header value being modified from what was originally signed<a href="#appendix-C.6-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

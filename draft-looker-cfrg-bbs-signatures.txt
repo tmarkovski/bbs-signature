@@ -132,6 +132,7 @@ Table of Contents
      C.3.  Missing Message Signature
      C.4.  Reordered Message Signature
      C.5.  Wrong Public Key Signature
+     C.6.  Wrong Public Key Signature
    Appendix D.  Proof Generation and Verification Algorithmic
            Explanation
    Appendix E.  Document History
@@ -1668,7 +1669,11 @@ Procedure:
 
 6.2.3.3.  Valid Single Message Signature
 
-   Using the following message
+   Using the following header
+
+   {{ $signatureFixtures.signature001.header }}
+
+   And the following message
 
    {{ $signatureFixtures.signature001.messages[0] }}
 
@@ -1679,8 +1684,12 @@ Procedure:
 
 6.2.3.4.  Valid Multi-Message Signature
 
-   Using the following messages (*Note* the ordering of the messages
-   MUST be preserved)
+   Using the following header
+
+   {{ $signatureFixtures.signature004.header }}
+
+   And the following messages (*Note* the ordering of the messages MUST
+   be preserved)
 
    {{ $signatureFixtures.signature004.messages[0] }}
 
@@ -1970,7 +1979,11 @@ Appendix C.  Additional BLS12-381 Ciphersuite Test Vectors
 
 C.1.  Modified Message Signature
 
-   Using the following message
+   Using the following header
+
+   {{ $signatureFixtures.signature002.header }}
+
+   And the following message
 
    {{ $signatureFixtures.signature002.messages[0] }}
 
@@ -1984,7 +1997,11 @@ C.1.  Modified Message Signature
 
 C.2.  Extra Unsigned Message Signature
 
-   Using the following messages
+   Using the following header
+
+   {{ $signatureFixtures.signature003.header }}
+
+   And the following messages
 
    {{ $signatureFixtures.signature003.messages[0] }}
 
@@ -2000,7 +2017,11 @@ C.2.  Extra Unsigned Message Signature
 
 C.3.  Missing Message Signature
 
-   Using the following messages
+   Using the following header
+
+   {{ $signatureFixtures.signature005.header }}
+
+   And the following messages
 
    {{ $signatureFixtures.signature005.messages[0] }}
 
@@ -2016,7 +2037,11 @@ C.3.  Missing Message Signature
 
 C.4.  Reordered Message Signature
 
-   Using the following messages
+   Using the following header
+
+   {{ $signatureFixtures.signature006.header }}
+
+   And the following messages
 
    {{ $signatureFixtures.signature006.messages[0] }}
 
@@ -2048,7 +2073,11 @@ C.4.  Reordered Message Signature
 
 C.5.  Wrong Public Key Signature
 
-   Using the following messages
+   Using the following header
+
+   {{ $signatureFixtures.signature007.header }}
+
+   And the following messages
 
    {{ $signatureFixtures.signature007.messages[0] }}
 
@@ -2077,6 +2106,42 @@ C.5.  Wrong Public Key Signature
    Along with the PK value as defined in Section 6.2.3.2 as inputs into
    the Verify operation should fail signature validation due to public
    key used to verify is in-correct
+
+C.6.  Wrong Public Key Signature
+
+   Using the following header
+
+   {{ $signatureFixtures.signature008.header }}
+
+   And the following messages
+
+   {{ $signatureFixtures.signature008.messages[0] }}
+
+   {{ $signatureFixtures.signature008.messages[1] }}
+
+   {{ $signatureFixtures.signature008.messages[2] }}
+
+   {{ $signatureFixtures.signature008.messages[3] }}
+
+   {{ $signatureFixtures.signature008.messages[4] }}
+
+   {{ $signatureFixtures.signature008.messages[5] }}
+
+   {{ $signatureFixtures.signature008.messages[6] }}
+
+   {{ $signatureFixtures.signature008.messages[7] }}
+
+   {{ $signatureFixtures.signature008.messages[8] }}
+
+   {{ $signatureFixtures.signature008.messages[9] }}
+
+   And the following signature
+
+   {{ $signatureFixtures.signature008.signature }}
+
+   Along with the PK value as defined in Section 6.2.3.2 as inputs into
+   the Verify operation should fail signature validation due to header
+   value being modified from what was originally signed
 
 Appendix D.  Proof Generation and Verification Algorithmic Explanation
 
