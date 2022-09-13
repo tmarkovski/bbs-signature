@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-01T00:11:08.633286+00:00",
+  "timestamp": "2022-09-13T00:12:18.216551+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -25786,24 +25786,26 @@
       "id": "PR_kwDOF8lax849auXi",
       "title": "Update signature related fixtures",
       "url": "https://github.com/decentralized-identity/bbs-signature/pull/208",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tplooker",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "This PR updates the fixtures to align to the current spec, including adding in those that feature a header value.",
       "createdAt": "2022-08-18T20:01:57Z",
-      "updatedAt": "2022-08-22T19:22:42Z",
+      "updatedAt": "2022-09-12T18:10:20Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "4e7cff0f246eeedc9b8736fde11b0ae73588e199",
       "headRepository": "decentralized-identity/bbs-signature",
       "headRefName": "tl/update-signature-fixtures",
       "headRefOid": "d65255be7528e38669b73b836003baadaff2718a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-09-12T18:10:15Z",
+      "mergedAt": "2022-09-12T18:10:15Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "cd221a28441de49b8369b376d23174f6c0173e5c"
+      },
       "comments": [
         {
           "author": "BasileiosKal",
@@ -25811,6 +25813,13 @@
           "body": "Discussed on the WG call of the 22nd of August! Will need to check the generator points on the spec for correctness and consistency with the new fixtures.",
           "createdAt": "2022-08-22T19:22:42Z",
           "updatedAt": "2022-08-22T19:22:42Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Merging with the recent merge of #214, still further work required on refining these fixtures.",
+          "createdAt": "2022-09-12T18:10:09Z",
+          "updatedAt": "2022-09-12T18:10:09Z"
         }
       ],
       "reviews": [
@@ -26150,6 +26159,110 @@
           "body": "",
           "createdAt": "2022-08-29T18:30:03Z",
           "updatedAt": "2022-08-29T18:30:03Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 214,
+      "id": "PR_kwDOF8lax84-ycM5",
+      "title": "Generator fixtures update",
+      "url": "https://github.com/decentralized-identity/bbs-signature/pull/214",
+      "state": "MERGED",
+      "author": "BasileiosKal",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updated generator fixtures. Also disabled the fixture-population workflow until the tooling is up to date with the spec.",
+      "createdAt": "2022-09-12T14:15:03Z",
+      "updatedAt": "2022-09-12T18:07:39Z",
+      "baseRepository": "decentralized-identity/bbs-signature",
+      "baseRefName": "main",
+      "baseRefOid": "1dbf27eab59c6fff1993940457d114cc22e15116",
+      "headRepository": "BasileiosKal/bbs-signature",
+      "headRefName": "gens-fixtures",
+      "headRefOid": "34913f0b7b077fc227c3d0ba1ea6fcb47667bdea",
+      "closedAt": "2022-09-12T18:07:39Z",
+      "mergedAt": "2022-09-12T18:07:39Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "5a47464430bb4522edb01926c892e7c2f6bde80d"
+      },
+      "comments": [
+        {
+          "author": "christianpaquin",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Are these for the shake ciphersuite, and if so, will there be sha256 values soon? ",
+          "createdAt": "2022-09-12T16:44:40Z",
+          "updatedAt": "2022-09-12T16:49:49Z"
+        },
+        {
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yea those are just for the shake suite (just updating the existing ones). Will hopefully include ones for the Sha256 suite soon enough.",
+          "createdAt": "2022-09-12T17:17:48Z",
+          "updatedAt": "2022-09-12T17:17:48Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Merging as it affects other fixture related PR's",
+          "createdAt": "2022-09-12T18:07:34Z",
+          "updatedAt": "2022-09-12T18:07:34Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOF8lax85B1vGS",
+          "commit": {
+            "abbreviatedOid": "34913f0"
+          },
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-12T18:03:58Z",
+          "updatedAt": "2022-09-12T18:03:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 215,
+      "id": "PR_kwDOF8lax84-zLXJ",
+      "title": "Add suite specific fixed g1 base point",
+      "url": "https://github.com/decentralized-identity/bbs-signature/pull/215",
+      "state": "OPEN",
+      "author": "BasileiosKal",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updated tooling to calculate the G1 base point for each ciphersuite. \r\n\r\n- To avoid conflicts with #214 I don't write them in the fixtures file (the points are hardcoded in the suites). Will update after that PR is resolved.\r\n- The message generator fixtures creation still needs updating to the latest spec.",
+      "createdAt": "2022-09-12T16:41:24Z",
+      "updatedAt": "2022-09-12T17:06:04Z",
+      "baseRepository": "decentralized-identity/bbs-signature",
+      "baseRefName": "main",
+      "baseRefOid": "1dbf27eab59c6fff1993940457d114cc22e15116",
+      "headRepository": "BasileiosKal/bbs-signature",
+      "headRefName": "g1-base-point",
+      "headRefOid": "eb8e53d16a2390b38d7a207af94e1eb4ed4d06c6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOF8lax85B1YPg",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-12T17:06:04Z",
+          "updatedAt": "2022-09-12T17:06:04Z",
           "comments": []
         }
       ]
