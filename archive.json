@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-13T00:12:18.216551+00:00",
+  "timestamp": "2022-09-15T00:11:21.234039+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -25527,7 +25527,7 @@
       "labels": [],
       "body": "Minor updates prior to IETF submission for 114 meeting.\r\n\r\n- Remove usage of the word derive when referring to proofs, instead using generate\r\n- Minor language and gramma tweaks\r\n- Moved considerations under scheme definition instead of it being its own section\r\n- Added basic description for selective disclosure use case for identity credentials\r\n- Added document history section",
       "createdAt": "2022-07-08T03:26:47Z",
-      "updatedAt": "2022-07-08T23:10:21Z",
+      "updatedAt": "2022-09-13T23:25:14Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "4f2a9fa6e0a165f84c4225603e8f8252a9f8c306",
@@ -26239,7 +26239,7 @@
       "labels": [],
       "body": "Updated tooling to calculate the G1 base point for each ciphersuite. \r\n\r\n- To avoid conflicts with #214 I don't write them in the fixtures file (the points are hardcoded in the suites). Will update after that PR is resolved.\r\n- The message generator fixtures creation still needs updating to the latest spec.",
       "createdAt": "2022-09-12T16:41:24Z",
-      "updatedAt": "2022-09-12T17:06:04Z",
+      "updatedAt": "2022-09-14T13:45:57Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "1dbf27eab59c6fff1993940457d114cc22e15116",
@@ -26264,6 +26264,126 @@
           "createdAt": "2022-09-12T17:06:04Z",
           "updatedAt": "2022-09-12T17:06:04Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOF8lax85B5q8_",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "jovfer",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T11:45:33Z",
+          "updatedAt": "2022-09-13T11:45:33Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "@BasileiosKal @OR13  most likely a dumb question(s) from me, as I'm not an expert in BBS:\r\n1) Is it OK to have a collision for some generator_i == P1?\r\n2) Or is it guaranteed that hash_to_curve_g1(...) <> P1? (why?)\r\n\r\nmay be it's worth a note here.",
+              "createdAt": "2022-09-13T11:45:33Z",
+              "updatedAt": "2022-09-13T11:47:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85B8LUX",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T18:43:55Z",
+          "updatedAt": "2022-09-13T18:43:55Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "cc @mikelodder7 @tplooker ",
+              "createdAt": "2022-09-13T18:43:55Z",
+              "updatedAt": "2022-09-13T18:43:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85B8RhA",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T19:05:48Z",
+          "updatedAt": "2022-09-13T19:05:49Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "That\u2019s actually a great question\ud83d\ude04\r\n\r\n## TL;TR\r\nIt's not OK to have a collision, but the probability of having a collision with P1 is practically 0.\r\n\r\n## In detail\r\nThat probability is ~2^-128. This comes from the collision resistance of hash_to_curve_g1 (which comes from the collision resistance of the underlying hash function+the security level of the curve). This guarantees that unless you create more than 2^128 generators, generator_i will be different from P1 (note that they are created from different inputs to `hash_to_curve_g1`). Also, even if a collision could be found, the attacker would have to influence the seed that is used to create all the generators to take advantage of it (they shouldn't be able to, in a correct implementation).\r\n\r\nIf that security level is deemed not enough in the future, there are alternative curves and hash functions that can be used, with higher security levels.\r\n\r\nWe have checks like that throughout the document, but we are currently debating if we should keep all of them. The tradeoff is that they guard against events that could compromise security, however, the probability of those events is practically 0. Also, we are worried that the more complicated draft could lead to implementation bugs like infinite loops (since we keep trying in a loop until we get a valid result).\r\n\r\nThe reason I removed P1 specifically here from that check was practical. We can't check for a coalition with P1 in the body of the same operation used to create P1.\r\n\r\nA note is a good idea. We do have an [issue](https://github.com/decentralized-identity/bbs-signature/issues/206) open, to debate on what the best way to describe those requirements would be. No matter the case though, we will soon add text that describes all those considerations in detail.",
+              "createdAt": "2022-09-13T19:05:48Z",
+              "updatedAt": "2022-09-13T19:25:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85B8RzY",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "mikelodder7",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T19:06:51Z",
+          "updatedAt": "2022-09-13T19:06:52Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "Agreed. The likelihood of a collision is so low it\u2019s not worth checking. Just a note about it is good enough",
+              "createdAt": "2022-09-13T19:06:51Z",
+              "updatedAt": "2022-09-13T19:06:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85B--lQ",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "jovfer",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-14T08:30:00Z",
+          "updatedAt": "2022-09-14T08:30:00Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "Thanks for the details, that makes perfect sense. My understanding was similar, but the next things is actually the source for my confusion: \r\nWhat about of the collusion for `generator_i` and `generator_j`? isn't it the same to `P1` vs `generator_i` ?\r\n\r\nShould we remove the whole check in this line? (seems like just one of the cases to be debated mentioned in your comment)",
+              "createdAt": "2022-09-14T08:30:00Z",
+              "updatedAt": "2022-09-14T08:36:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85CA2RX",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-14T13:45:57Z",
+          "updatedAt": "2022-09-14T13:45:57Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "Collisions between `generator_i` and `generator_j` are a bit different. Because we are essentially checking for (any) duplicates (rather than equality with a fixed value, i.e., `generator_i = P1`), we must also consider the [birthday paradox](https://en.wikipedia.org/wiki/Birthday_problem) when calculating the probability of that event.\r\n \r\nThat said, it probably won\u2019t matter enough in practice, and the probability will still be close to ~2^-128. So most likely we will remove that check too. It\u2019s a bit more complicated case though so we want to be 100% sure first.",
+              "createdAt": "2022-09-14T13:45:57Z",
+              "updatedAt": "2022-09-14T13:45:57Z"
+            }
+          ]
         }
       ]
     }
