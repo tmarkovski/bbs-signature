@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-15T00:11:21.234039+00:00",
+  "timestamp": "2022-09-18T00:11:39.215321+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -26239,7 +26239,7 @@
       "labels": [],
       "body": "Updated tooling to calculate the G1 base point for each ciphersuite. \r\n\r\n- To avoid conflicts with #214 I don't write them in the fixtures file (the points are hardcoded in the suites). Will update after that PR is resolved.\r\n- The message generator fixtures creation still needs updating to the latest spec.",
       "createdAt": "2022-09-12T16:41:24Z",
-      "updatedAt": "2022-09-14T13:45:57Z",
+      "updatedAt": "2022-09-15T10:59:18Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "1dbf27eab59c6fff1993940457d114cc22e15116",
@@ -26382,6 +26382,26 @@
               "body": "Collisions between `generator_i` and `generator_j` are a bit different. Because we are essentially checking for (any) duplicates (rather than equality with a fixed value, i.e., `generator_i = P1`), we must also consider the [birthday paradox](https://en.wikipedia.org/wiki/Birthday_problem) when calculating the probability of that event.\r\n \r\nThat said, it probably won\u2019t matter enough in practice, and the probability will still be close to ~2^-128. So most likely we will remove that check too. It\u2019s a bit more complicated case though so we want to be 100% sure first.",
               "createdAt": "2022-09-14T13:45:57Z",
               "updatedAt": "2022-09-14T13:45:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85CGZ8d",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "jovfer",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-15T10:56:14Z",
+          "updatedAt": "2022-09-15T10:56:15Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "ah yes, I've missed the effect of the birthday paradox in the first place at all. Not sure how much actual effect it will have for avg number of msgs per credential for such small probability per single collision, but agree: let's keep the rest of the check for now.\r\nThanks for the explanation.",
+              "createdAt": "2022-09-15T10:56:14Z",
+              "updatedAt": "2022-09-15T10:59:18Z"
             }
           ]
         }
