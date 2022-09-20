@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-18T00:11:39.215321+00:00",
+  "timestamp": "2022-09-20T00:15:06.607130+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -3642,7 +3642,7 @@
       "id": "I_kwDOF8lax85IT7fR",
       "title": "Review security considerations",
       "url": "https://github.com/decentralized-identity/bbs-signature/issues/111",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tplooker",
       "authorAssociation": "MEMBER",
       "assignees": [],
@@ -3651,8 +3651,8 @@
       ],
       "body": "Some of the security considerations documented in the spec were originally copied from the [bls-signature-draft](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature-04#section-5.2) and should now be re-reviewed for their applicability.",
       "createdAt": "2022-04-23T03:41:10Z",
-      "updatedAt": "2022-08-15T18:53:02Z",
-      "closedAt": null,
+      "updatedAt": "2022-09-19T18:50:42Z",
+      "closedAt": "2022-09-19T18:50:42Z",
       "comments": [
         {
           "author": "tplooker",
@@ -3667,6 +3667,13 @@
           "body": "Discussed on WG call 15th of August, consistency has significantly improved since filing this issue, however leaving open for the time being for a deeper review to be conducted",
           "createdAt": "2022-08-15T18:53:01Z",
           "updatedAt": "2022-08-15T18:53:01Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call 19th of September, closing as a broader security review of the specification will be required in any case which may yield new security considerations.",
+          "createdAt": "2022-09-19T18:50:42Z",
+          "updatedAt": "2022-09-19T18:50:42Z"
         }
       ]
     },
@@ -4378,7 +4385,7 @@
       "id": "I_kwDOF8lax85KDjM1",
       "title": "Clarify number of bytes drawn from xof for `hash` function",
       "url": "https://github.com/decentralized-identity/bbs-signature/issues/148",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tplooker",
       "authorAssociation": "MEMBER",
       "assignees": [],
@@ -4388,8 +4395,8 @@
       ],
       "body": "Currently the BLS12-381 ciphersuite defines to use SHAKE-256 for the implementation of the `hash` function but doesn't clarify how many bytes to draw, this should be updated.",
       "createdAt": "2022-05-20T00:05:25Z",
-      "updatedAt": "2022-08-15T18:41:20Z",
-      "closedAt": null,
+      "updatedAt": "2022-09-19T18:49:06Z",
+      "closedAt": "2022-09-19T18:49:06Z",
       "comments": [
         {
           "author": "tplooker",
@@ -4411,6 +4418,13 @@
           "body": "Also related to #143 because using a non XOF would not create such ambiguity",
           "createdAt": "2022-08-15T18:41:19Z",
           "updatedAt": "2022-08-15T18:41:19Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call 19th of september, resolved to close",
+          "createdAt": "2022-09-19T18:49:06Z",
+          "updatedAt": "2022-09-19T18:49:06Z"
         }
       ]
     },
@@ -4697,7 +4711,7 @@
       ],
       "body": "Since any point on respective cyclic subgroup G1 and G2 can work as P1 and P2.\r\nFor interoperability, I think we should define the values of P1 and P2 in cipher suites. By clubbing this value in ciphersuite, an interoperable implementation has to refer only to cipher suite ID otherwise these have to be communicated on application-level messages or protocols.\r\n\r\nRegarding values for BLS12-381 ciphersuites, fixed base generators defined by pairing-crypto libraries zkcrypto(defined [here](https://github.com/zkcrypto/bls12_381/blob/34dab74ae44cd77dfa867928dd2e6c8383d8dc9d/src/g1.rs#L198) and [here](https://github.com/zkcrypto/bls12_381/blob/34dab74ae44cd77dfa867928dd2e6c8383d8dc9d/src/g2.rs#L212)) and blst(defined [here](https://github.com/supranational/blst/blob/bd8e64f97cb55217df1f7e84d4d73d6d8461e608/src/e1.c#L20) and [here](https://github.com/supranational/blst/blob/bd8e64f97cb55217df1f7e84d4d73d6d8461e608/src/e2.c#L24)) can be used. Both these libraries use same value for fixed base generators.",
       "createdAt": "2022-06-02T06:27:35Z",
-      "updatedAt": "2022-08-08T18:32:50Z",
+      "updatedAt": "2022-09-19T18:48:25Z",
       "closedAt": null,
       "comments": [
         {
@@ -4720,6 +4734,13 @@
           "body": "Options discussed are \r\n\r\n1. Document P1 and P2 as the base points on the underlying curve\r\n2. Document P2 as the base point on the underlying curve and select a single new global (per-curve) value for P1 to preserve the usage of the base point in G1 for private holder binding\r\n3. Use the create generator procedure to output Q1 as P1",
           "createdAt": "2022-08-08T18:32:49Z",
           "updatedAt": "2022-08-08T18:32:49Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Will be resolved by #215",
+          "createdAt": "2022-09-19T18:48:25Z",
+          "updatedAt": "2022-09-19T18:48:25Z"
         }
       ]
     },
@@ -4923,7 +4944,7 @@
       "id": "I_kwDOF8lax85MJRcJ",
       "title": "Handling subgroup checks",
       "url": "https://github.com/decentralized-identity/bbs-signature/issues/179",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tplooker",
       "authorAssociation": "MEMBER",
       "assignees": [],
@@ -4934,8 +4955,8 @@
       ],
       "body": "Currently in the draft there are several key places we need to do subgroup checks on points, for example to validate a public key post de-serialization. However in some places we are implicitly relying on the `octet_to_point` function to perform this role and other places we are doing it as an explicit step in the procedure. We need to make this consistent, the options are\r\n\r\n1) Consistently rely on the `octet_to_point_g*` implementation and add a security consideration that documents this function MUST perform the relevant subgroup check.\r\n2) Explicitly document anywhere in the procedure where a subgroup check is required.\r\n\r\nIMO 2 feels like a safer but more verbose option to me.",
       "createdAt": "2022-06-20T23:36:55Z",
-      "updatedAt": "2022-08-08T18:15:20Z",
-      "closedAt": null,
+      "updatedAt": "2022-09-19T18:46:53Z",
+      "closedAt": "2022-09-19T18:46:53Z",
       "comments": [
         {
           "author": "BasileiosKal",
@@ -4957,6 +4978,13 @@
           "body": "Discussed on WG 8th August, there is potentially some inconsistencies that we need to address before we can close this issue",
           "createdAt": "2022-08-08T18:15:20Z",
           "updatedAt": "2022-08-08T18:15:20Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed on WG call 20th of September, we believe the major inconsistencies around this check are resolved, closing for now and will re-open if some where missed.",
+          "createdAt": "2022-09-19T18:46:53Z",
+          "updatedAt": "2022-09-19T18:46:53Z"
         }
       ]
     },
@@ -5136,10 +5164,13 @@
       "assignees": [
         "BasileiosKal"
       ],
-      "labels": [],
+      "labels": [
+        "ready-for-pr",
+        "core"
+      ],
       "body": "Currently we allow seeds with different scopes but it is not clear how a signature specific seed is going to be used since it is passed as a parameter to `create_generators` and not as input. Also i think this is a case that we want to reduce optionality (for example we don't want `generator_seed = hash(all_messages)`).\r\n\r\nI think it's best to not allow \"scoped seeds\" but different `create_generators` operations. Each create_generators will accept a `seed` and a `dst` as a parameter and a `count` as input. If one wants signature specific generators they can use the `count` input but nothing else. This will be enough for \"legacy support\". \r\n\r\nThis also makes it easier to describe the requirements of the `create_generators` operations (rather than the requirements for the seed selection).\r\n\r\nIMO there are 2 options:\r\n1. Don't allow different `create_generators` or `scoped_seeds`: No changes are needed, expect to remove the text around \"scoped seeds\".\r\n2. Allow different `create_generators`: In this case IMO we should:\r\n    - Add a `create_generators_operation` parameter in the ciphersuites definition.\r\n    - For the suites defined in the document give the `create_generators_operation` parameter the value of \"`create_generators` with `generator_seed=...`\".\r\n    - Require every create_generators operation to also define a unique ID which will be added to the ciphersuite_id (like EXP_TAG for expand_message in [h2c](https://www.ietf.org/archive/id/draft-irtf-cfrg-hash-to-curve-16.html#name-suite-id-naming-conventions)).\r\n    - Add `create_generators_operation` as a parameter to Sign, Verify etc..\r\n    - Add the requirements for defining a new `create_generators_operation`.\r\n\r\nObviously 1 is the simplest but the least flexible. It also is a \"breaking change\" with previous versions. So my preference will be 2 but I'm also very interested in others thoughts on the matter.",
       "createdAt": "2022-08-18T10:35:22Z",
-      "updatedAt": "2022-08-22T19:16:21Z",
+      "updatedAt": "2022-09-19T18:39:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -5159,11 +5190,16 @@
       "state": "OPEN",
       "author": "BasileiosKal",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "BasileiosKal"
+      ],
+      "labels": [
+        "ready-for-pr",
+        "core"
+      ],
       "body": "I don't think we are consistent about this. For example we define utf8 as accepting only ascii strings and we don't handle non ascii strings in `encode_for_hash`, even though we have an utf8 encoding. Also, I think \"ASCII character sequence\" is what we meant as \"ascii string\" but is not everywhere clear. \r\n\r\nNot sure what is best here. Should we assume that all the messages are already an octet string (and just mention some ways for transforming a char sequence to octets)?? So the only think that is left is DST's that we can encode with utf8??\r\n\r\nI think this is what most crypto specs do, so i would go with that.",
       "createdAt": "2022-08-18T18:05:33Z",
-      "updatedAt": "2022-08-22T19:15:37Z",
+      "updatedAt": "2022-09-19T18:35:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -5184,10 +5220,12 @@
       "author": "BasileiosKal",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "core"
+      ],
       "body": "Through the use of `expand_message` we put an upper limit to the number of signed messages.\r\n\r\n`expand_message` aborts if `len_in_bytes` is larger than `2^16 - 1 = 65535`. In our case `len_in_bytes = count * expand_len`. The `count` can be (at most) equal to the number of signed messages (during ProofGen, if we decide to hide all messages). In the current ciphersuite `expand_len = 48`. As a result, the `count` can be at most 1365 which means that the total number of signed messages can also be at most 1365 (or at least a prover cannot choose to not disclose more than 1365 messages).\r\n\r\nThat's quite unfortunate IMO, since the 1365 messages limit seems quite small to me!\r\n\r\n### How to solve this??\r\n\r\nNot sure what the best solution is. The root of the problem is step 9 in [ProofGen](https://identity.foundation/bbs-signature/draft-looker-cfrg-bbs-signatures.html#name-proofgen), i.e., the step:\r\n```\r\n9. (m~_j1, ..., m~_jU) = hash_to_scalar(PRF(prf_len), U)\r\n```\r\nsince U cannot be more than 1365. Should we call `hash_to_scalar` in a loop with multiple calls to the PRF or extent the output length of the PRF to get more seeds if we need more than 1365 scalars?? Or should we define expand_message alternatives with higher output limits (2^32 would be nice, however this would create more implementation barriers comparatively)??",
       "createdAt": "2022-08-19T16:13:53Z",
-      "updatedAt": "2022-08-22T19:14:04Z",
+      "updatedAt": "2022-09-19T18:36:00Z",
       "closedAt": null,
       "comments": [
         {
@@ -5196,6 +5234,13 @@
           "body": "Discussed on the WG call of the 22nd of August. One proposed option by @andrewwhitehead is to use the PRF as an input to `proofGen` and iterate through it in a loop to create the different scalars. For testing we can then supply a deterministic PRF (like seeded ChaCha), instead of a seed. Will document the different options and revisit.",
           "createdAt": "2022-08-22T18:43:59Z",
           "updatedAt": "2022-08-22T19:14:04Z"
+        },
+        {
+          "author": "christianpaquin",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "As we discussed on the call today, perhaps good to measure the perf difference in practice after prototyping both approaches. ",
+          "createdAt": "2022-09-19T18:36:00Z",
+          "updatedAt": "2022-09-19T18:36:00Z"
         }
       ]
     }
@@ -25913,7 +25958,7 @@
       "labels": [],
       "body": "Depended on #208 being merged ahead",
       "createdAt": "2022-08-18T21:54:02Z",
-      "updatedAt": "2022-08-25T04:26:16Z",
+      "updatedAt": "2022-09-19T18:46:48Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "4e7cff0f246eeedc9b8736fde11b0ae73588e199",
@@ -25931,6 +25976,20 @@
           "body": "Question about the values used to generate these test vectors: do all the signatures and proofs use the generators in `fixtures/generators.json`, and if so, are the two first entries `Q1` and `Q2` and the remaining ones `H1` ... `H8` ? ",
           "createdAt": "2022-08-25T04:26:16Z",
           "updatedAt": "2022-08-25T04:26:16Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "DIscussed on WG call 20th Sept, will add a note to capture the fixtures are non-deterministic in nature.",
+          "createdAt": "2022-09-19T18:23:12Z",
+          "updatedAt": "2022-09-19T18:23:12Z"
+        },
+        {
+          "author": "christianpaquin",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "It would be great to also add the fixtures for the sha256 ciphersuite",
+          "createdAt": "2022-09-19T18:46:48Z",
+          "updatedAt": "2022-09-19T18:46:48Z"
         }
       ],
       "reviews": [
@@ -26239,7 +26298,7 @@
       "labels": [],
       "body": "Updated tooling to calculate the G1 base point for each ciphersuite. \r\n\r\n- To avoid conflicts with #214 I don't write them in the fixtures file (the points are hardcoded in the suites). Will update after that PR is resolved.\r\n- The message generator fixtures creation still needs updating to the latest spec.",
       "createdAt": "2022-09-12T16:41:24Z",
-      "updatedAt": "2022-09-15T10:59:18Z",
+      "updatedAt": "2022-09-19T18:15:43Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "1dbf27eab59c6fff1993940457d114cc22e15116",
@@ -26404,6 +26463,19 @@
               "updatedAt": "2022-09-15T10:59:18Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85CUiWi",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "andrewwhitehead",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-19T18:15:43Z",
+          "updatedAt": "2022-09-19T18:15:43Z",
+          "comments": []
         }
       ]
     }
