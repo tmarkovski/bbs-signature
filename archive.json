@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-20T00:15:06.607130+00:00",
+  "timestamp": "2022-09-25T00:13:14.677013+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -26478,6 +26478,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 216,
+      "id": "PR_kwDOF8lax84_hTR8",
+      "title": "Update encoding rules",
+      "url": "https://github.com/decentralized-identity/bbs-signature/pull/216",
+      "state": "OPEN",
+      "author": "BasileiosKal",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #207\r\n\r\nDSTs are defined as octet strings everywhere. Default DSTs are turned into octet strings using `utf8`. Also, the `ciphersuite_id` is excluded from the \u201cmust be prepended with its length\u201d rule when hashing (no reason for it).",
+      "createdAt": "2022-09-23T19:49:00Z",
+      "updatedAt": "2022-09-23T19:49:00Z",
+      "baseRepository": "decentralized-identity/bbs-signature",
+      "baseRefName": "main",
+      "baseRefOid": "cd221a28441de49b8369b376d23174f6c0173e5c",
+      "headRepository": "BasileiosKal/bbs-signature",
+      "headRefName": "encoding_updates",
+      "headRefOid": "c71ffc19ddd9d50906b5777c3925bd0eed343830",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
