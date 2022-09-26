@@ -5,11 +5,11 @@
 CFRG                                                           T. Looker
 Internet-Draft                                                  V. Kalos
 Intended status: Informational                                     MATTR
-Expires: 16 March 2023                                      A. Whitehead
+Expires: 30 March 2023                                      A. Whitehead
                                                                  Portage
                                                                M. Lodder
                                                                  CryptID
-                                                       12 September 2022
+                                                       26 September 2022
 
 
                         The BBS Signature Scheme
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 March 2023.
+   This Internet-Draft will expire on 30 March 2023.
 
 Copyright Notice
 
@@ -530,6 +530,7 @@ Inputs:
 Parameters:
 
 - ciphersuite_id, ASCII string. The unique ID of the ciphersuite.
+- P1, fixed point of G1, defined by the ciphersuite.
 
 Definitions:
 
@@ -595,6 +596,7 @@ Inputs:
 Parameters:
 
 - ciphersuite_id, ASCII string. The unique ID of the ciphersuite.
+- P1, fixed point of G1, defined by the ciphersuite.
 
 Definitions:
 
@@ -664,6 +666,7 @@ Inputs:
 Parameters:
 
 - ciphersuite_id, ASCII string. The unique ID of the ciphersuite.
+- P1, fixed point of G1, defined by the ciphersuite.
 
 Definitions:
 
@@ -767,6 +770,7 @@ Inputs:
 Parameters:
 
 - ciphersuite_id, ASCII string. The unique ID of the ciphersuite.
+- P1, fixed point of G1, defined by the ciphersuite.
 
 Definitions:
 
@@ -852,6 +856,7 @@ Procedure:
                    specified by the hash_to_curve_suite parameter.
  - generator_seed, octet string. A seed value selected by the
                    ciphersuite.
+ - P1, fixed point of G1, defined by the ciphersuite.
 
  Definitions:
 
@@ -876,7 +881,7 @@ Procedure:
  5.     n = n + 1
  6.     generator_i = Identity_G1
  7.     candidate = hash_to_curve_g1(v, generator_dst)
- 8.     if candidate in (P1, generator_1, ..., generator_i):
+ 8.     if candidate in (generator_1, ..., generator_i):
  9.        go back to step 4
  10.    generator_i = candidate
  11. return (generator_1, ..., generator_count)
@@ -1455,6 +1460,8 @@ Procedure:
       (either expand_message_xmd or expand_message_xof) operations used
       in this document.
 
+   *  P1: A fixed point in the G1 subgroup.
+
    *Serialization functions*:
 
    *  point_to_octets_g1: a function that returns the canonical
@@ -1530,6 +1537,13 @@ Procedure:
       defined in Appendix A.1 (#bls12-381-hash-to-curve-definition-
       using-shake-256) for the G1 subgroup.
 
+   *  P1: The G1 point returned from the create_generators procedure,
+      with generator_seed = "BBS_BLS12381G1_XOF:SHAKE-
+      256_SSWU_RO_BP_MESSAGE_GENERATOR_SEED".  More specifically,
+
+     P1 = 0x93a18d666efaaa35c317283d6f090667a4062ed42dab79d2a4c318f742d6
+            c45ef10b303eb9c418d37400c0c3816accc1
+
    *Serialization functions*:
 
    *  point_to_octets_g1: follows the format documented in Appendix C
@@ -1572,6 +1586,13 @@ Procedure:
    *  hash_to_curve_suite: "BLS12381G1_XMD:SHA-256_SSWU_RO_" as defined
       in Section 8.8.1 of the [I-D.irtf-cfrg-hash-to-curve] for the G1
       subgroup.
+
+   *  P1: The G1 point returned from the create_generators procedure,
+      with generator_seed = "BBS_BLS12381G1_XMD:SHA-
+      256_SSWU_RO_BP_MESSAGE_GENERATOR_SEED".  More specifically,
+
+     P1 = 0xad98180923a716ac626a3f7e7ffd3faa71820074bb7ae221fd01c406a6a5
+            636540ef3a3e18b21619a3bdff69e81d5da7
 
    *Serialization functions*:
 
