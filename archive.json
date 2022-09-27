@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-25T00:13:14.677013+00:00",
+  "timestamp": "2022-09-27T00:17:44.488045+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -25958,7 +25958,7 @@
       "labels": [],
       "body": "Depended on #208 being merged ahead",
       "createdAt": "2022-08-18T21:54:02Z",
-      "updatedAt": "2022-09-19T18:46:48Z",
+      "updatedAt": "2022-09-26T16:51:43Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "4e7cff0f246eeedc9b8736fde11b0ae73588e199",
@@ -25990,6 +25990,13 @@
           "body": "It would be great to also add the fixtures for the sha256 ciphersuite",
           "createdAt": "2022-09-19T18:46:48Z",
           "updatedAt": "2022-09-19T18:46:48Z"
+        },
+        {
+          "author": "christianpaquin",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> It would be great to also add the fixtures for the sha256 ciphersuite\r\n\r\nAny ETA for this, @tplooker, @BasileiosKal? Anxious to plug these in my implementation :)",
+          "createdAt": "2022-09-26T16:51:43Z",
+          "updatedAt": "2022-09-26T16:51:43Z"
         }
       ],
       "reviews": [
@@ -26291,25 +26298,35 @@
       "id": "PR_kwDOF8lax84-zLXJ",
       "title": "Add suite specific fixed g1 base point",
       "url": "https://github.com/decentralized-identity/bbs-signature/pull/215",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "BasileiosKal",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Updated tooling to calculate the G1 base point for each ciphersuite. \r\n\r\n- To avoid conflicts with #214 I don't write them in the fixtures file (the points are hardcoded in the suites). Will update after that PR is resolved.\r\n- The message generator fixtures creation still needs updating to the latest spec.",
       "createdAt": "2022-09-12T16:41:24Z",
-      "updatedAt": "2022-09-19T18:15:43Z",
+      "updatedAt": "2022-09-26T20:20:13Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "1dbf27eab59c6fff1993940457d114cc22e15116",
       "headRepository": "BasileiosKal/bbs-signature",
       "headRefName": "g1-base-point",
       "headRefOid": "eb8e53d16a2390b38d7a207af94e1eb4ed4d06c6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2022-09-26T20:20:12Z",
+      "mergedAt": "2022-09-26T20:20:12Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "3e69a8b16fd7788993e9d3a8849f311ade47fc5e"
+      },
+      "comments": [
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "Multiple reviews and approvals, merging",
+          "createdAt": "2022-09-26T20:20:06Z",
+          "updatedAt": "2022-09-26T20:20:06Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOF8lax85B1YPg",
@@ -26476,6 +26493,19 @@
           "createdAt": "2022-09-19T18:15:43Z",
           "updatedAt": "2022-09-19T18:15:43Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOF8lax85CzszV",
+          "commit": {
+            "abbreviatedOid": "eb8e53d"
+          },
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-26T20:19:14Z",
+          "updatedAt": "2022-09-26T20:19:14Z",
+          "comments": []
         }
       ]
     },
@@ -26491,7 +26521,7 @@
       "labels": [],
       "body": "Closes #207\r\n\r\nDSTs are defined as octet strings everywhere. Default DSTs are turned into octet strings using `utf8`. Also, the `ciphersuite_id` is excluded from the \u201cmust be prepended with its length\u201d rule when hashing (no reason for it).",
       "createdAt": "2022-09-23T19:49:00Z",
-      "updatedAt": "2022-09-23T19:49:00Z",
+      "updatedAt": "2022-09-26T18:07:31Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "cd221a28441de49b8369b376d23174f6c0173e5c",
@@ -26503,7 +26533,68 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOF8lax85CzGeS",
+          "commit": {
+            "abbreviatedOid": "c71ffc1"
+          },
+          "author": "andrewwhitehead",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-26T18:06:41Z",
+          "updatedAt": "2022-09-26T18:06:41Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "`el` is utf8 but utf8 is applied again",
+              "createdAt": "2022-09-26T18:06:41Z",
+              "updatedAt": "2022-09-26T18:06:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85CzGod",
+          "commit": {
+            "abbreviatedOid": "c71ffc1"
+          },
+          "author": "andrewwhitehead",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-26T18:07:11Z",
+          "updatedAt": "2022-09-26T18:07:11Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "Is this used? Why not just pass it as a G2 point?",
+              "createdAt": "2022-09-26T18:07:11Z",
+              "updatedAt": "2022-09-26T18:07:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85CzGud",
+          "commit": {
+            "abbreviatedOid": "c71ffc1"
+          },
+          "author": "andrewwhitehead",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-26T18:07:30Z",
+          "updatedAt": "2022-09-26T18:07:31Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\n            utf8(ciphersuite_id || \"SIG_GENERATOR_SEED_\"), where\r\n```",
+              "createdAt": "2022-09-26T18:07:30Z",
+              "updatedAt": "2022-09-26T18:07:31Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
