@@ -5,15 +5,15 @@
 CFRG                                                           T. Looker
 Internet-Draft                                                  V. Kalos
 Intended status: Informational                                     MATTR
-Expires: 30 March 2023                                      A. Whitehead
+Expires: 9 April 2023                                       A. Whitehead
                                                                  Portage
                                                                M. Lodder
                                                                  CryptID
-                                                       26 September 2022
+                                                          6 October 2022
 
 
                         The BBS Signature Scheme
-                draft-looker-cfrg-bbs-signatures-latest
+                 draft-irtf-cfrg-bbs-signatures-latest
 
 Abstract
 
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 March 2023.
+   This Internet-Draft will expire on 9 April 2023.
 
 Copyright Notice
 
