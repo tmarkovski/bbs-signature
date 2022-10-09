@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-27T00:17:44.488045+00:00",
+  "timestamp": "2022-10-09T00:14:13.336125+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -5243,6 +5243,62 @@
           "updatedAt": "2022-09-19T18:36:00Z"
         }
       ]
+    },
+    {
+      "number": 217,
+      "id": "I_kwDOF8lax85TYYTt",
+      "title": "P1 calculation in tooling code",
+      "url": "https://github.com/decentralized-identity/bbs-signature/issues/217",
+      "state": "OPEN",
+      "author": "dev0x1",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As per spec, P1 is calculated using `create_generators` with a specific `generator_seed`. `create_generators` procedure as described [here](https://identity.foundation/bbs-signature/draft-looker-cfrg-bbs-signatures.html#name-generator-point-computation) starts calculation with `n=1` but below reference reference code in `tooling`  to calculate P1 uses `n=0`. \r\nhttps://github.com/decentralized-identity/bbs-signature/blob/3e69a8b16fd7788993e9d3a8849f311ade47fc5e/tooling/message-generators/src/main.rs#L193\r\nI think the code should be updated as below and then the new values of `P1` also need to be updated in the cipher suites constants section.\r\n```rust \r\nlet extra = 1usize.to_be_bytes()[4..].to_vec();\r\n```\r\n\r\n\r\n",
+      "createdAt": "2022-10-06T06:26:33Z",
+      "updatedAt": "2022-10-08T23:16:14Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks for pointing this out! Addressed in #221.",
+          "createdAt": "2022-10-08T23:16:14Z",
+          "updatedAt": "2022-10-08T23:16:14Z"
+        }
+      ]
+    },
+    {
+      "number": 218,
+      "id": "I_kwDOF8lax85Tapch",
+      "title": "Preferred method of generating random points",
+      "url": "https://github.com/decentralized-identity/bbs-signature/issues/218",
+      "state": "OPEN",
+      "author": "mikelodder7",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "After inspection of the code, I found some [examples](https://github.com/decentralized-identity/bbs-signature/blob/3e69a8b16fd7788993e9d3a8849f311ade47fc5e/tooling/message-generators/src/main.rs#L117)  where a random scalar is chosen then multiplied by a point. While not inherently insecure, there is the potential side channel attack which allows an attacker to learn the discrete log of the random point.\r\n\r\nGoing forward I propose our new preferred method for creating random points is to draw random bytes and then use hash to curve. The reasoning is even if an attacker learns the random bytes they still do not learn the discrete log of the point and secondly, if the random data is manipulated or has a specific structure, the hashing effectively destroys this.",
+      "createdAt": "2022-10-06T12:14:13Z",
+      "updatedAt": "2022-10-06T12:15:25Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 219,
+      "id": "I_kwDOF8lax85Tdr3g",
+      "title": "Public key format",
+      "url": "https://github.com/decentralized-identity/bbs-signature/issues/219",
+      "state": "OPEN",
+      "author": "BasileiosKal",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "When using the public key as input to Sign, Verify etc., we can define it either as a point of G2 or as an octet string. Rn we do the later, consistent with what the BLS spec does.\r\n\r\nThat said, passing it as a G2 point, will simplify the encode for has operation a bit, since we don't need a \"special clause\" there so we would not append it with it length, since it would be handled like any other point. See also [here](https://github.com/decentralized-identity/bbs-signature/pull/216#discussion_r980354472) for context. \r\n\r\nIMO defining it as an octet string is more intuitive, but Im fine with both.",
+      "createdAt": "2022-10-06T20:56:24Z",
+      "updatedAt": "2022-10-06T20:56:24Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -25958,7 +26014,7 @@
       "labels": [],
       "body": "Depended on #208 being merged ahead",
       "createdAt": "2022-08-18T21:54:02Z",
-      "updatedAt": "2022-09-26T16:51:43Z",
+      "updatedAt": "2022-10-08T23:56:07Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "4e7cff0f246eeedc9b8736fde11b0ae73588e199",
@@ -25997,6 +26053,13 @@
           "body": "> It would be great to also add the fixtures for the sha256 ciphersuite\r\n\r\nAny ETA for this, @tplooker, @BasileiosKal? Anxious to plug these in my implementation :)",
           "createdAt": "2022-09-26T16:51:43Z",
           "updatedAt": "2022-09-26T16:51:43Z"
+        },
+        {
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hey @christianpaquin! Sorry for the long delay. Had to take some time off. Iv now opened #221 with the updated fixtures. \r\n\r\nNote that the signature fixtures do also take into account #216. It's a simple update were the ciphersuite id is not appended with its length when hashing.",
+          "createdAt": "2022-10-08T23:56:07Z",
+          "updatedAt": "2022-10-08T23:56:07Z"
         }
       ],
       "reviews": [
@@ -26521,18 +26584,26 @@
       "labels": [],
       "body": "Closes #207\r\n\r\nDSTs are defined as octet strings everywhere. Default DSTs are turned into octet strings using `utf8`. Also, the `ciphersuite_id` is excluded from the \u201cmust be prepended with its length\u201d rule when hashing (no reason for it).",
       "createdAt": "2022-09-23T19:49:00Z",
-      "updatedAt": "2022-09-26T18:07:31Z",
+      "updatedAt": "2022-10-06T20:56:48Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
-      "baseRefOid": "cd221a28441de49b8369b376d23174f6c0173e5c",
+      "baseRefOid": "7e587fa1f7489f470b6d6d2fd3413a961fba8ef9",
       "headRepository": "BasileiosKal/bbs-signature",
       "headRefName": "encoding_updates",
-      "headRefOid": "c71ffc19ddd9d50906b5777c3925bd0eed343830",
+      "headRefOid": "aee2934719c75eacfb85622ebe898fcd539217af",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "tplooker",
+          "authorAssociation": "MEMBER",
+          "body": "With the CFRG draft adoption the draft name has changed again, please rebase this PR to target the new draft name `draft-irtf-cfrg-bbs-signatures`",
+          "createdAt": "2022-10-06T20:31:48Z",
+          "updatedAt": "2022-10-06T20:31:48Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOF8lax85CzGeS",
@@ -26593,8 +26664,161 @@
               "updatedAt": "2022-09-26T18:07:31Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85DkadL",
+          "commit": {
+            "abbreviatedOid": "c71ffc1"
+          },
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-06T20:46:46Z",
+          "updatedAt": "2022-10-06T20:46:46Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "Thinks! Fixed.",
+              "createdAt": "2022-10-06T20:46:46Z",
+              "updatedAt": "2022-10-06T20:46:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85Dkag_",
+          "commit": {
+            "abbreviatedOid": "c71ffc1"
+          },
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-06T20:47:01Z",
+          "updatedAt": "2022-10-06T20:47:02Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Thanks! Fixed.",
+              "createdAt": "2022-10-06T20:47:01Z",
+              "updatedAt": "2022-10-06T20:47:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85Dkc_B",
+          "commit": {
+            "abbreviatedOid": "c71ffc1"
+          },
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-06T20:56:48Z",
+          "updatedAt": "2022-10-06T20:56:48Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "We definitely could, but i like having the PK as an octet string. It's more intuitive for a developer IMO. Also updating this would be a bigger change (will need to update the `octets_to_pubkey` to something like `validate_pubkey` which I'm not sure how it would look like. Opened #219 to keep track of this.",
+              "createdAt": "2022-10-06T20:56:48Z",
+              "updatedAt": "2022-10-06T20:56:48Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 220,
+      "id": "PR_kwDOF8lax85AZPon",
+      "title": "Tooling: fix DST input param for h2c ops while msg generators calculation",
+      "url": "https://github.com/decentralized-identity/bbs-signature/pull/220",
+      "state": "OPEN",
+      "author": "jovfer",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Align msg generator tooling to spec.\r\n\r\nhttps://github.com/decentralized-identity/bbs-signature/blob/main/draft-irtf-cfrg-bbs-signatures.md#generator-point-computation - step 7th of the `Procedure`",
+      "createdAt": "2022-10-07T13:26:24Z",
+      "updatedAt": "2022-10-08T23:15:42Z",
+      "baseRepository": "decentralized-identity/bbs-signature",
+      "baseRefName": "main",
+      "baseRefOid": "7e587fa1f7489f470b6d6d2fd3413a961fba8ef9",
+      "headRepository": "jovfer/bbs-signature",
+      "headRefName": "sm/fix_tooling_msg_gen",
+      "headRefOid": "54e5cd592bacfba39503fb3c5432702b9217bb98",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOF8lax85DnzQ4",
+          "commit": {
+            "abbreviatedOid": "54e5cd5"
+          },
+          "author": "jovfer",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-07T13:39:13Z",
+          "updatedAt": "2022-10-07T13:39:14Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "Is it intentional divergency from the spec? The `msg` / `buffer` to be hashed in the next line is output of expand_msg according to the spec and it's just direct output of shake256 in this impl.\r\n\r\n`make_g1_base_point` seems to be aligned to the spec",
+              "createdAt": "2022-10-07T13:39:13Z",
+              "updatedAt": "2022-10-07T13:41:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85DqwMD",
+          "commit": {
+            "abbreviatedOid": "54e5cd5"
+          },
+          "author": "BasileiosKal",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-08T23:15:42Z",
+          "updatedAt": "2022-10-08T23:15:42Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "Its a create_generators procedure from a previous version of the spec and should be updated. Thanks for pointing it out!",
+              "createdAt": "2022-10-08T23:15:42Z",
+              "updatedAt": "2022-10-08T23:15:42Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 221,
+      "id": "PR_kwDOF8lax85AcLi4",
+      "title": "Fixtures and tooling update",
+      "url": "https://github.com/decentralized-identity/bbs-signature/pull/221",
+      "state": "OPEN",
+      "author": "BasileiosKal",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR:\r\n- Updates existing fixtures and adds SHA256 suite ones. Proof fixture files are included but not added to the spec to avoid further conflicts with #210.\r\n- Updates the fixtures tooling to read and write the fixtures on the document.\r\n- Closes #217. Updates the message-generators tooling to return the correct file format.\r\n\r\n## Notes \r\n\r\n1. This PR depends on #216 (in all the fixtures i am not prepending the length of the ciphersuite's ID encoding when hashing).\r\n2. The message-generators tooling is \"deactivated\" on the workflow since it is not up to date with the spec. The generator files are not the ones returned by that tool and should be the correct ones.",
+      "createdAt": "2022-10-08T23:12:23Z",
+      "updatedAt": "2022-10-08T23:55:08Z",
+      "baseRepository": "decentralized-identity/bbs-signature",
+      "baseRefName": "main",
+      "baseRefOid": "7e587fa1f7489f470b6d6d2fd3413a961fba8ef9",
+      "headRepository": "BasileiosKal/bbs-signature",
+      "headRefName": "fixtures-update",
+      "headRefOid": "8248ff5defa4efbb9f7051755992fd63486aac55",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
