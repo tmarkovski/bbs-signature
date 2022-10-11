@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-09T00:14:13.336125+00:00",
+  "timestamp": "2022-10-11T00:15:18.899194+00:00",
   "repo": "decentralized-identity/bbs-signature",
   "labels": [
     {
@@ -26730,22 +26730,22 @@
     {
       "number": 220,
       "id": "PR_kwDOF8lax85AZPon",
-      "title": "Tooling: fix DST input param for h2c ops while msg generators calculation",
+      "title": "Tooling: update msg generators calculation",
       "url": "https://github.com/decentralized-identity/bbs-signature/pull/220",
       "state": "OPEN",
       "author": "jovfer",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
-      "body": "Align msg generator tooling to spec.\r\n\r\nhttps://github.com/decentralized-identity/bbs-signature/blob/main/draft-irtf-cfrg-bbs-signatures.md#generator-point-computation - step 7th of the `Procedure`",
+      "body": "Align msg generator tooling to the spec:\r\n* fix DST for h2c\r\n* replace hash by expand",
       "createdAt": "2022-10-07T13:26:24Z",
-      "updatedAt": "2022-10-08T23:15:42Z",
+      "updatedAt": "2022-10-10T06:58:32Z",
       "baseRepository": "decentralized-identity/bbs-signature",
       "baseRefName": "main",
       "baseRefOid": "7e587fa1f7489f470b6d6d2fd3413a961fba8ef9",
       "headRepository": "jovfer/bbs-signature",
       "headRefName": "sm/fix_tooling_msg_gen",
-      "headRefOid": "54e5cd592bacfba39503fb3c5432702b9217bb98",
+      "headRefOid": "6fa2fcbe2b4f800a9e2141bd336a743664b22356",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -26789,6 +26789,26 @@
               "body": "Its a create_generators procedure from a previous version of the spec and should be updated. Thanks for pointing it out!",
               "createdAt": "2022-10-08T23:15:42Z",
               "updatedAt": "2022-10-08T23:15:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOF8lax85Drtan",
+          "commit": {
+            "abbreviatedOid": "54e5cd5"
+          },
+          "author": "jovfer",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-10T06:41:03Z",
+          "updatedAt": "2022-10-10T06:41:04Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "done, please review",
+              "createdAt": "2022-10-10T06:41:03Z",
+              "updatedAt": "2022-10-10T06:48:19Z"
             }
           ]
         }
